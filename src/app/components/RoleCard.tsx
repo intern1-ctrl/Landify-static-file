@@ -9,6 +9,7 @@ interface RoleCardProps {
   imageUrl: string;
   gradient: string;
   reverse?: boolean;
+  fullView?: boolean;
 }
 
 export function RoleCard({
@@ -19,15 +20,15 @@ export function RoleCard({
   imageUrl,
   gradient,
   reverse = false,
+  fullView = false,
 }: RoleCardProps) {
   return (
     <motion.div
       initial={{ opacity: 0, y: 30 }}
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true }}
-      className={`grid md:grid-cols-2 gap-8 items-center ${
-        reverse ? 'md:grid-flow-dense' : ''
-      }`}
+      className={`grid md:grid-cols-2 gap-8 items-center ${reverse ? 'md:grid-flow-dense' : ''
+        }`}
     >
       {/* Content */}
       <div className={reverse ? 'md:col-start-2' : ''}>
@@ -54,11 +55,11 @@ export function RoleCard({
 
       {/* Image */}
       <div className={reverse ? 'md:col-start-1 md:row-start-1' : ''}>
-        <div className="relative rounded-2xl overflow-hidden shadow-2xl">
+        <div className="relative rounded-2xl overflow-hidden shadow-2xl max-w-xs mx-auto">
           <img
             src={imageUrl}
             alt={title}
-            className="w-full h-[400px] object-cover"
+            className="w-full h-auto object-cover"
           />
           <div className={`absolute inset-0 bg-gradient-to-t ${gradient} opacity-20`} />
         </div>

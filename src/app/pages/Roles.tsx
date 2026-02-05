@@ -4,7 +4,7 @@ import { motion } from 'motion/react';
 import { UserCog, Users, Sprout, Handshake } from 'lucide-react';
 
 const IMAGES = {
-  banner: 'https://images.unsplash.com/photo-1661932912841-7557bed41c1d?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHx2aWxsYWdlJTIwYWdyaWN1bHR1cmUlMjBsYW5kc2NhcGV8ZW58MXx8fHwxNzcwMjk3MDE4fDA&ixlib=rb-4.1.0&q=80&w=1080',
+  banner: 'https://images.unsplash.com/photo-1757525473930-0b82237e55ac?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxzdXN0YWluYWJsZSUyMGFncmljdWx0dXJlJTIwZ3JlZW4lMjBmYXJtaW5nfGVufDF8fHx8MTc3MDI5NzAxOHww&ixlib=rb-4.1.0&q=80&w=1080',
   farmer: 'https://images.unsplash.com/photo-1629288465751-07e42186084f?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxmYXJtZXIlMjB3b3JraW5nJTIwZmllbGQlMjBpbmRpYXxlbnwxfHx8fDE3NzAyOTcwMTd8MA&ixlib=rb-4.1.0&q=80&w=1080',
   officer: 'https://images.unsplash.com/photo-1582794496242-8165eed32971?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxhZ3JpY3VsdHVyYWwlMjBmaWVsZCUyMG9mZmljZXIlMjBpbnNwZWN0aW9ufGVufDF8fHx8MTc3MDI5NzAxN3ww&ixlib=rb-4.1.0&q=80&w=1080',
   sustainable: 'https://images.unsplash.com/photo-1757525473930-0b82237e55ac?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxzdXN0YWluYWJsZSUyMGFncmljdWx0dXJlJTIwZ3JlZW4lMjBmYXJtaW5nfGVufDF8fHx8MTc3MDI5NzAxOHww&ixlib=rb-4.1.0&q=80&w=1080',

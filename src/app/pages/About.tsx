@@ -2,9 +2,11 @@ import { motion } from 'motion/react';
 import { PageBanner } from '../components/PageBanner';
 import { Target, Eye, Leaf, Users, TrendingUp, MapPin } from 'lucide-react';
 
+import farm3 from '../../assets/farm3.jpeg';
+
 const IMAGES = {
   banner: 'https://images.unsplash.com/photo-1757525473930-0b82237e55ac?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxzdXN0YWluYWJsZSUyMGFncmljdWx0dXJlJTIwZ3JlZW4lMjBmYXJtaW5nfGVufDF8fHx8MTc3MDI5NzAxOHww&ixlib=rb-4.1.0&q=80&w=1080',
-  village: 'https://images.unsplash.com/photo-1661932912841-7557bed41c1d?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHx2aWxsYWdlJTIwYWdyaWN1bHR1cmUlMjBsYW5kc2NhcGV8ZW58MXx8fHwxNzcwMjk3MDE4fDA&ixlib=rb-4.1.0&q=80&w=1080',
+  village: farm3,
 };
 
 export function About() {
@@ -53,11 +55,11 @@ export function About() {
               viewport={{ once: true }}
               className="relative"
             >
-              <div className="relative rounded-2xl overflow-hidden shadow-2xl">
+              <div className="relative rounded-2xl overflow-hidden shadow-2xl max-w-xs mx-auto">
                 <img
                   src={IMAGES.village}
                   alt="Village Agriculture"
-                  className="w-full h-[400px] object-cover"
+                  className="w-full h-auto object-cover"
                 />
                 <div className="absolute inset-0 bg-gradient-to-t from-green-900/30 to-transparent" />
               </div>

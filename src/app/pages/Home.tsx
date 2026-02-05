@@ -1,10 +1,10 @@
 import { motion } from 'motion/react';
 import { LifecycleFlow } from '../components/LifecycleFlow';
 import { RoleCard } from '../components/RoleCard';
-import { 
-  Sprout, 
-  UserCog, 
-  Users, 
+import {
+  Sprout,
+  UserCog,
+  Users,
   TruckIcon,
   Shield,
   Target,
@@ -12,11 +12,15 @@ import {
   ChevronDown
 } from 'lucide-react';
 
+import farm3 from '../../assets/farm3.jpeg';
+import farm4 from '../../assets/farm4.jpeg';
+import farm6 from '../../assets/farm6.jpeg';
+
 const IMAGES = {
   hero: 'https://images.unsplash.com/photo-1761055277862-c0962cb4c8ae?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxncmVlbiUyMGdyYXNzJTIwZmllbGQlMjBzdW5saWdodCUyMGFncmljdWx0dXJlfGVufDF8fHx8MTc3MDI5NzAxNnww&ixlib=rb-4.1.0&q=80&w=1080',
   farmer: 'https://images.unsplash.com/photo-1629288465751-07e42186084f?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxmYXJtZXIlMjB3b3JraW5nJTIwZmllbGQlMjBpbmRpYXxlbnwxfHx8fDE3NzAyOTcwMTd8MA&ixlib=rb-4.1.0&q=80&w=1080',
-  officer: 'https://images.unsplash.com/photo-1582794496242-8165eed32971?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxhZ3JpY3VsdHVyYWwlMjBmaWVsZCUyMG9mZmljZXIlMjBpbnNwZWN0aW9ufGVufDF8fHx8MTc3MDI5NzAxN3ww&ixlib=rb-4.1.0&q=80&w=1080',
-  tractor: 'https://images.unsplash.com/photo-1769018932876-2fb70ddaeeb7?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHx0cmFjdG9yJTIwYWdyaWN1bHR1cmUlMjBydXJhbCUyMHRyYW5zcG9ydHxlbnwxfHx8fDE3NzAyOTcwMTd8MA&ixlib=rb-4.1.0&q=80&w=1080',
+  officer: farm3,
+  tractor: farm4,
   sustainable: 'https://images.unsplash.com/photo-1757525473930-0b82237e55ac?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxzdXN0YWluYWJsZSUyMGFncmljdWx0dXJlJTIwZ3JlZW4lMjBmYXJtaW5nfGVufDF8fHx8MTc3MDI5NzAxOHww&ixlib=rb-4.1.0&q=80&w=1080',
 };
 
@@ -24,10 +28,10 @@ export function Home() {
   return (
     <div>
       {/* Hero Section */}
-      <section className="relative h-screen overflow-hidden">
+      <section className="relative h-[85vh] overflow-hidden">
         {/* Background Image */}
         <div
-          className="absolute inset-0 bg-cover bg-center"
+          className="absolute inset-0 bg-cover bg-top"
           style={{ backgroundImage: `url(${IMAGES.hero})` }}
         >
           <div className="absolute inset-0 bg-gradient-to-r from-green-900/85 via-green-800/70 to-transparent" />
@@ -212,6 +216,7 @@ export function Home() {
             <RoleCard
               icon={UserCog}
               title="Field Officer"
+              fullView
               description="Managing Operations Across 40 Villages"
               responsibilities={[
                 'Oversees agents and farmers across 40+ villages',
@@ -275,11 +280,11 @@ export function Home() {
               viewport={{ once: true }}
               className="relative"
             >
-              <div className="relative rounded-2xl overflow-hidden shadow-2xl">
+              <div className="relative rounded-2xl overflow-hidden shadow-2xl max-w-xs mx-auto">
                 <img
                   src={IMAGES.tractor}
                   alt="Tractor Transportation"
-                  className="w-full h-[500px] object-cover"
+                  className="w-full h-auto object-cover"
                 />
                 <div className="absolute inset-0 bg-gradient-to-t from-amber-900/30 to-transparent" />
               </div>

@@ -1,5 +1,5 @@
 import { Link, useLocation } from 'react-router-dom';
-import { Sprout, Menu, X } from 'lucide-react';
+import { Sprout, Menu, X, MapPin, Phone, Mail } from 'lucide-react';
 import { useState } from 'react';
 import { motion, AnimatePresence } from 'motion/react';
 
@@ -39,11 +39,10 @@ export function Layout({ children }: { children: React.ReactNode }) {
                 <Link
                   key={link.path}
                   to={link.path}
-                  className={`relative px-3 py-2 transition-colors ${
-                    isActive(link.path)
+                  className={`relative px-3 py-2 transition-colors ${isActive(link.path)
                       ? 'text-green-700'
                       : 'text-gray-600 hover:text-green-600'
-                  }`}
+                    }`}
                 >
                   {link.label}
                   {isActive(link.path) && (
@@ -85,11 +84,10 @@ export function Layout({ children }: { children: React.ReactNode }) {
                       key={link.path}
                       to={link.path}
                       onClick={() => setMobileMenuOpen(false)}
-                      className={`block px-4 py-3 rounded-lg transition-colors ${
-                        isActive(link.path)
+                      className={`block px-4 py-3 rounded-lg transition-colors ${isActive(link.path)
                           ? 'bg-green-50 text-green-700'
                           : 'text-gray-600 hover:bg-green-50 hover:text-green-600'
-                      }`}
+                        }`}
                     >
                       {link.label}
                     </Link>
@@ -109,7 +107,7 @@ export function Layout({ children }: { children: React.ReactNode }) {
       {/* Footer */}
       <footer className="bg-gradient-to-br from-green-900 via-green-800 to-green-900 text-white">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12">
             {/* About */}
             <div>
               <div className="flex items-center gap-2 mb-4">
@@ -141,8 +139,8 @@ export function Layout({ children }: { children: React.ReactNode }) {
 
             {/* Legal */}
             <div>
-              <h3 className="font-semibold mb-4 text-green-100">Legal</h3>
-              <ul className="space-y-2 text-sm">
+              <h3 className="font-semibold mb-4 text-green-100 uppercase tracking-wider text-xs">Legal</h3>
+              <ul className="space-y-3 text-sm">
                 <li>
                   <Link
                     to="/terms"
@@ -158,6 +156,31 @@ export function Layout({ children }: { children: React.ReactNode }) {
                   >
                     Privacy Policy
                   </Link>
+                </li>
+              </ul>
+            </div>
+
+            {/* Contact Us */}
+            <div>
+              <h3 className="font-semibold mb-6 text-green-100 uppercase tracking-wider text-xs">Contact Us</h3>
+              <ul className="space-y-4 text-sm">
+                <li className="flex items-start gap-3">
+                  <MapPin className="size-5 text-green-400 flex-shrink-0" />
+                  <span className="text-green-100">
+                    206, 2nd floor, Block-A, PSR Prime Tower, Beside DLF, Gachibowli
+                  </span>
+                </li>
+                <li className="flex items-center gap-3">
+                  <Phone className="size-5 text-green-400 flex-shrink-0" />
+                  <a href="tel:+917702710290" className="text-green-100 hover:text-white transition-colors">
+                    +91 77027 10290
+                  </a>
+                </li>
+                <li className="flex items-center gap-3">
+                  <Mail className="size-5 text-green-400 flex-shrink-0" />
+                  <a href="mailto:contact@markwave.ai" className="text-green-100 hover:text-white transition-colors">
+                    contact@markwave.ai
+                  </a>
                 </li>
               </ul>
             </div>

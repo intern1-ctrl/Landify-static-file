@@ -4,7 +4,7 @@ import { Mail, Phone, MapPin, Send } from 'lucide-react';
 import { useState } from 'react';
 
 const IMAGES = {
-  banner: 'https://images.unsplash.com/photo-1761055277862-c0962cb4c8ae?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxncmVlbiUyMGdyYXNzJTIwZmllbGQlMjBzdW5saWdodCUyMGFncmljdWx0dXJlfGVufDF8fHx8MTc3MDI5NzAxNnww&ixlib=rb-4.1.0&q=80&w=1080',
+  banner: 'https://images.unsplash.com/photo-1757525473930-0b82237e55ac?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxzdXN0YWluYWJsZSUyMGFncmljdWx0dXJlJTIwZ3JlZW4lMjBmYXJtaW5nfGVufDF8fHx8MTc3MDI5NzAxOHww&ixlib=rb-4.1.0&q=80&w=1080',
 };
 
 export function Contact() {
@@ -55,8 +55,7 @@ export function Contact() {
                   </div>
                   <div>
                     <h3 className="font-semibold text-gray-900 mb-1">Email</h3>
-                    <p className="text-gray-600">info@landify.com</p>
-                    <p className="text-gray-600">support@landify.com</p>
+                    <p className="text-gray-600">contact@markwave.ai</p>
                   </div>
                 </div>
 
@@ -66,8 +65,7 @@ export function Contact() {
                   </div>
                   <div>
                     <h3 className="font-semibold text-gray-900 mb-1">Phone</h3>
-                    <p className="text-gray-600">+91 12345 67890</p>
-                    <p className="text-gray-600">+91 98765 43210</p>
+                    <p className="text-gray-600">+91 77027 10290</p>
                   </div>
                 </div>
 
@@ -78,9 +76,8 @@ export function Contact() {
                   <div>
                     <h3 className="font-semibold text-gray-900 mb-1">Office</h3>
                     <p className="text-gray-600">
-                      Agricultural Innovation Hub<br />
-                      Rural Development Center<br />
-                      District Headquarters
+                      206, 2nd floor, Block-A, PSR Prime Tower,<br />
+                      Beside DLF, Gachibowli
                     </p>
                   </div>
                 </div>
@@ -215,7 +212,7 @@ export function Contact() {
               Our network spans across multiple districts, bringing sustainable agriculture
               opportunities to rural communities.
             </p>
-            
+
             <div className="grid md:grid-cols-4 gap-6">
               {[
                 { label: 'Villages', value: '40+' },
