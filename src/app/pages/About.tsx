@@ -29,7 +29,7 @@ export function About() {
               <h1 className="text-5xl md:text-7xl font-bold text-[#0a2e1f] mb-6 leading-tight">
                 About Us
               </h1>
-              <p className="text-xl text-[#0a2e1f]/90 max-w-xl leading-relaxed font-semibold">
+              <p className="text-xl text-[#0a2e1f] max-w-xl leading-relaxed font-semibold">
                 Landify is more than just an agricultural business; we are a community-driven ecosystem
                 bridging the gap between traditional wisdom and modern innovation.
               </p>
@@ -125,9 +125,9 @@ export function About() {
               viewport={{ once: true }}
               className="p-12 md:p-24 border-r border-white/10 flex flex-col justify-center group hover:bg-white/5 transition-colors"
             >
-              <Eye className="size-20 text-blue-400 mb-8 transform group-hover:scale-110 transition-transform" />
+              <Eye className="size-20 text-white mb-8 transform group-hover:scale-110 transition-transform" />
               <h3 className="text-white text-5xl font-black mb-8 tracking-tighter uppercase">Our Vision</h3>
-              <p className="text-blue-100/70 text-2xl leading-relaxed font-bold tracking-tight">
+              <p className="text-white/90 text-2xl leading-relaxed font-bold tracking-tight">
                 To become India's most trusted sustainable agriculture network,
                 connecting rural abundance with modern investment horizons.
               </p>
@@ -140,9 +140,9 @@ export function About() {
               viewport={{ once: true }}
               className="p-12 md:p-24 flex flex-col justify-center group hover:bg-white/5 transition-colors"
             >
-              <Target className="size-20 text-green-400 mb-8 transform group-hover:scale-110 transition-transform" />
+              <Target className="size-20 text-white mb-8 transform group-hover:scale-110 transition-transform" />
               <h3 className="text-white text-5xl font-black mb-8 tracking-tighter uppercase">Our Mission</h3>
-              <p className="text-green-100/70 text-2xl leading-relaxed font-bold tracking-tight">
+              <p className="text-white/90 text-2xl leading-relaxed font-bold tracking-tight">
                 Empowering farmers through structured management and high-quality
                 cultivation standards that deliver absolute reliability.
               </p>
@@ -244,7 +244,7 @@ export function About() {
                 <div className="text-6xl md:text-7xl font-black text-white mb-4 tracking-tighter block group-hover:text-green-400 transition-colors drop-shadow-[0_0_15px_rgba(34,197,94,0.3)]">
                   {stat.value}
                 </div>
-                <div className="text-green-500 font-bold text-xs tracking-[0.3em] uppercase">
+                <div className="text-[#0a2e1f] font-bold text-xs tracking-[0.3em] uppercase">
                   {stat.label}
                 </div>
                 <div className="mt-4 w-12 h-1 bg-green-500/20 mx-auto rounded-full group-hover:w-20 group-hover:bg-green-500 transition-all duration-500" />

@@ -237,7 +237,7 @@ export function Process() {
                 className="group relative bg-white/5 backdrop-blur-xl p-12 rounded-[3rem] border border-white/10 hover:border-green-500/30 transition-all shadow-2xl"
               >
                 <div className={`size-20 rounded-2xl bg-${box.color}-500/20 flex items-center justify-center mb-10 border border-${box.color}-500/40 group-hover:scale-110 transition-transform`}>
-                  <box.icon className={`size-10 text-${box.color}-400`} />
+                  <box.icon className="size-10 text-white" />
                 </div>
                 <h3 className="text-3xl font-black text-white mb-8 tracking-tight uppercase">{box.title}</h3>
                 <ul className="space-y-5">

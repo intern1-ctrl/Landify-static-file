@@ -170,7 +170,7 @@ export function LifecycleFlow() {
             { icon: Sprout, value: '100%', label: 'SUSTAINABLE OPS', color: 'emerald' },
           ].map((stat, i) => (
             <div key={i} className="relative group p-10 bg-[#57BA98] rounded-[3rem] border border-white/20 hover:bg-[#4ea889] transition-all text-center shadow-2xl">
-              <stat.icon className="size-12 text-[#0a2e1f] mx-auto mb-6 group-hover:scale-125 transition-transform" />
+              <stat.icon className="size-12 text-white mx-auto mb-6 group-hover:scale-125 transition-transform" />
               <div className="text-5xl font-black text-[#0a2e1f] mb-2 tracking-tighter">{stat.value}</div>
               <div className="text-xs text-[#0a2e1f]/70 font-black tracking-[0.3em] uppercase">{stat.label}</div>
               <div className="mt-8 h-1 w-12 bg-[#0a2e1f]/20 mx-auto rounded-full group-hover:w-20 group-hover:bg-[#0a2e1f] transition-all duration-500" />

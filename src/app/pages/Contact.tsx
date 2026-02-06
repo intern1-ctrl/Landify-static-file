@@ -41,9 +41,9 @@ export function Contact() {
               <h1 className="text-5xl md:text-7xl font-bold text-white mb-6 leading-tight">
                 Contact Us
               </h1>
-              <p className="text-xl text-white/80 max-w-lg leading-relaxed">
+              <p className="text-xl text-white max-w-lg leading-relaxed font-medium">
                 Our support team and field experts are ready to assist you.
-                Average response time: <span className="text-white font-bold">2 Hours</span>.
+                Average response time: <span className="text-green-300 font-bold">2 Hours</span>.
               </p>
             </motion.div>
 
@@ -89,16 +89,13 @@ export function Contact() {
               viewport={{ once: true }}
               className="flex flex-col justify-center"
             >
-              <div className="inline-flex items-center gap-2 px-4 py-2 rounded-lg bg-green-500/10 border border-green-500/20 text-green-400 font-black text-xs uppercase tracking-[0.3em] mb-10">
-                <div className="size-2 bg-green-500 rounded-full animate-pulse" />
-                <span>Global Connectivity Ops</span>
-              </div>
+
 
               <h2 className="text-5xl font-black text-white mb-8 tracking-tighter uppercase leading-tight">
                 Get in <span className="text-green-500">Immediate</span> <br /> Strategic Contact
               </h2>
 
-              <p className="text-xl text-green-100/60 mb-12 leading-relaxed font-bold italic border-l-4 border-green-600 pl-6">
+              <p className="text-xl text-white mb-12 leading-relaxed font-bold italic border-l-4 border-green-600 pl-6">
                 Direct access to our operational hubs. Whether you're a farmer, investor,
                 or agent, your communication is our priority.
               </p>
@@ -111,11 +108,11 @@ export function Contact() {
                 ].map((item, idx) => (
                   <div key={idx} className="flex items-center gap-6 group">
                     <div className={`w-14 h-14 rounded-2xl bg-${item.color}-500/10 border border-${item.color}-500/20 flex items-center justify-center group-hover:bg-${item.color}-500 group-hover:scale-110 transition-all duration-500`}>
-                      <item.icon className={`size-7 text-${item.color}-400 group-hover:text-white transition-colors`} />
+                      <item.icon className="size-7 text-white transition-colors" />
                     </div>
                     <div>
-                      <div className="text-gray-500 font-bold text-xs uppercase tracking-widest mb-1">{item.label}</div>
-                      <div className="text-white text-xl font-black group-hover:text-green-400 transition-colors uppercase tracking-tight">{item.value}</div>
+                      <div className="text-[#0a2e1f] font-black text-xs uppercase tracking-widest mb-1">{item.label}</div>
+                      <div className="text-white text-xl font-black group-hover:text-[#0a2e1f] transition-colors uppercase tracking-tight">{item.value}</div>
                     </div>
                   </div>
                 ))}
@@ -126,11 +123,11 @@ export function Contact() {
                 <div className="grid grid-cols-2 gap-4">
                   <div className="text-white">
                     <div className="text-lg font-black">MON - FRI</div>
-                    <div className="text-gray-500 font-bold text-sm">09:00 - 18:00</div>
+                    <div className="text-[#0a2e1f] font-black text-sm uppercase">09:00 - 18:00</div>
                   </div>
                   <div className="text-white text-right border-l border-white/10">
                     <div className="text-lg font-black">SATURDAY</div>
-                    <div className="text-gray-500 font-bold text-sm">09:00 - 14:00</div>
+                    <div className="text-[#0a2e1f] font-black text-sm uppercase">09:00 - 14:00</div>
                   </div>
                 </div>
               </div>
@@ -236,7 +233,7 @@ export function Contact() {
             <h2 className="text-5xl font-black text-[#0a2e1f] mb-6 tracking-tighter uppercase italic">
               Regional <span className="text-green-600">Density</span>
             </h2>
-            <p className="text-xl text-gray-500 font-bold max-w-2xl mx-auto tracking-wide">
+            <p className="text-xl text-[#0a2e1f] font-black max-w-2xl mx-auto tracking-wide uppercase">
               Powering agricultural innovation across 40+ strategic village sectors.
             </p>
           </motion.div>

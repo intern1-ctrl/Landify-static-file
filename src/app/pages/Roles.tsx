@@ -197,7 +197,7 @@ export function Roles() {
                 className="group relative bg-slate-900/60 backdrop-blur-md p-10 rounded-3xl border border-white/10 hover:border-blue-500/50 transition-all shadow-2xl"
               >
                 <div className={`w-16 h-16 rounded-2xl bg-${item.color}-500/10 flex items-center justify-center mb-8 border border-${item.color}-500/20`}>
-                  <item.icon className={`size-8 text-${item.color}-400`} />
+                  <item.icon className="size-8 text-white" />
                 </div>
                 <h3 className="text-2xl font-black text-white mb-4 tracking-tight">
                   {item.title}
