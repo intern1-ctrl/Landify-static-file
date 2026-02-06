@@ -234,15 +234,15 @@ export function Process() {
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
                 transition={{ delay: index * 0.1 }}
-                className="group relative bg-slate-900/60 backdrop-blur-xl p-12 rounded-[3rem] border border-white/10 hover:border-green-500/30 transition-all shadow-2xl"
+                className="group relative bg-white/5 backdrop-blur-xl p-12 rounded-[3rem] border border-white/10 hover:border-green-500/30 transition-all shadow-2xl"
               >
-                <div className={`size-20 rounded-2xl bg-${box.color}-500/10 flex items-center justify-center mb-10 border border-${box.color}-500/20 group-hover:scale-110 transition-transform`}>
+                <div className={`size-20 rounded-2xl bg-${box.color}-500/20 flex items-center justify-center mb-10 border border-${box.color}-500/40 group-hover:scale-110 transition-transform`}>
                   <box.icon className={`size-10 text-${box.color}-400`} />
                 </div>
                 <h3 className="text-3xl font-black text-white mb-8 tracking-tight uppercase">{box.title}</h3>
                 <ul className="space-y-5">
                   {box.items.map((item, i) => (
-                    <li key={i} className="flex items-center gap-4 text-green-100/60 font-medium group/item">
+                    <li key={i} className="flex items-center gap-4 text-gray-300 font-medium group/item">
                       <div className={`size-2 rounded-full bg-${box.color}-500 group-hover/item:scale-150 transition-transform shadow-[0_0_10px_rgba(34,197,94,0.5)]`} />
                       {item}
                     </li>

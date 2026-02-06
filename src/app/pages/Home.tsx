@@ -257,7 +257,7 @@ export function Home() {
                 Precision <span className="text-amber-500">Logistics</span> & Fast Delivery
               </h2>
 
-              <p className="text-xl text-gray-400 mb-10 leading-relaxed font-medium">
+              <p className="text-xl text-[#0a2e1f] mb-10 leading-relaxed font-bold">
                 Our optimized transportation network ensures that every bundle of green grass is tracked
                 and delivered with architectural precision across rural terrains.
               </p>
@@ -269,13 +269,13 @@ export function Home() {
                   { text: 'Tractor Fleet', sub: 'Rural terrain ready' },
                   { text: 'Real-time Tracking', sub: 'GPS coordinated' },
                 ].map((item, index) => (
-                  <div key={index} className="flex items-center gap-4 bg-slate-800/40 p-4 rounded-xl border border-white/10 hover:border-amber-500/40 transition-colors">
+                  <div key={index} className="flex items-center gap-4 bg-[#0a2e1f]/10 p-4 rounded-xl border border-[#0a2e1f]/20 hover:border-amber-500/40 transition-colors">
                     <div className="w-12 h-12 rounded-lg bg-amber-500 flex items-center justify-center flex-shrink-0">
                       <div className="w-2 h-2 rounded-full bg-white animate-pulse" />
                     </div>
                     <div>
-                      <div className="text-white font-bold">{item.text}</div>
-                      <div className="text-gray-500 text-sm whitespace-nowrap">{item.sub}</div>
+                      <div className="text-[#0a2e1f] font-black">{item.text}</div>
+                      <div className="text-[#0a2e1f]/60 text-sm whitespace-nowrap font-bold">{item.sub}</div>
                     </div>
                   </div>
                 ))}

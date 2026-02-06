@@ -50,7 +50,7 @@ const lifecycleSteps = [
 
 export function LifecycleFlow() {
   return (
-    <section className="relative py-24 bg-[#123C69] overflow-hidden">
+    <section className="relative py-24 bg-[#2B1B17] overflow-hidden">
       <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
@@ -62,7 +62,7 @@ export function LifecycleFlow() {
           <h2 className="text-5xl font-black text-white mb-6 uppercase tracking-tighter">
             The <span className="text-green-500 italic">Landify</span> Lifecycle
           </h2>
-          <p className="text-xl text-gray-400 max-w-2xl mx-auto font-medium leading-relaxed">
+          <p className="text-xl text-white/70 max-w-2xl mx-auto font-medium leading-relaxed">
             A high-precision journey from governance to global delivery.
           </p>
         </motion.div>
@@ -85,7 +85,7 @@ export function LifecycleFlow() {
                 {/* Step Number */}
                 <div className="absolute -top-10 left-1/2 -translate-x-1/2 text-4xl font-black text-white/5 group-hover:text-green-500/10 transition-colors uppercase italic">{index + 1}</div>
 
-                <div className="bg-[#1e293b]/50 backdrop-blur-xl rounded-[2.5rem] p-8 border border-white/10 hover:border-green-500/40 transition-all duration-500 h-full flex flex-col group/card shadow-[0_20px_50px_rgba(0,0,0,0.3)]">
+                <div className="bg-white/5 backdrop-blur-xl rounded-[2.5rem] p-8 border border-white/10 hover:border-green-500/40 transition-all duration-500 h-full flex flex-col group/card shadow-[0_20px_50px_rgba(0,0,0,0.3)]">
                   {/* Icon Module */}
                   <div className={`size-20 mx-auto mb-8 rounded-2xl bg-gradient-to-br ${step.color} flex items-center justify-center shadow-lg group-hover/card:scale-110 group-hover/card:rotate-6 transition-transform`}>
                     <step.icon className="size-10 text-white" />
@@ -95,14 +95,14 @@ export function LifecycleFlow() {
                     {step.title}
                   </h3>
 
-                  <p className="text-xs text-green-400/60 text-center mb-6 font-bold tracking-widest uppercase">
+                  <p className="text-xs text-green-400 text-center mb-6 font-bold tracking-widest uppercase">
                     {step.description}
                   </p>
 
                   <ul className="space-y-3 mt-auto">
                     {step.details.map((detail, i) => (
-                      <li key={i} className="text-[11px] text-gray-400 flex items-start gap-2 font-medium">
-                        <div className="size-1.5 rounded-full bg-green-500/40 mt-1 flex-shrink-0" />
+                      <li key={i} className="text-[11px] text-gray-300 flex items-start gap-2 font-medium">
+                        <div className="size-1.5 rounded-full bg-green-500 mt-1 flex-shrink-0" />
                         <span>{detail}</span>
                       </li>
                     ))}
@@ -169,11 +169,11 @@ export function LifecycleFlow() {
             { icon: IndianRupee, value: '₹1 Lakh', label: 'ANNUAL LEASE / ACRE', color: 'blue' },
             { icon: Sprout, value: '100%', label: 'SUSTAINABLE OPS', color: 'emerald' },
           ].map((stat, i) => (
-            <div key={i} className="relative group p-10 bg-[#57BA98] rounded-[3rem] border border-green-500/20 hover:bg-[#0a2e1f] transition-all text-center shadow-2xl">
-              <stat.icon className="size-12 text-green-500 mx-auto mb-6 group-hover:scale-125 transition-transform" />
-              <div className="text-5xl font-black text-white mb-2 tracking-tighter drop-shadow-[0_0_15px_rgba(34,197,94,0.3)]">{stat.value}</div>
-              <div className="text-xs text-gray-400 font-black tracking-[0.4em] uppercase">{stat.label}</div>
-              <div className="mt-8 h-1 w-12 bg-green-500/20 mx-auto rounded-full group-hover:w-20 group-hover:bg-green-500 transition-all duration-500" />
+            <div key={i} className="relative group p-10 bg-[#57BA98] rounded-[3rem] border border-white/20 hover:bg-[#4ea889] transition-all text-center shadow-2xl">
+              <stat.icon className="size-12 text-[#0a2e1f] mx-auto mb-6 group-hover:scale-125 transition-transform" />
+              <div className="text-5xl font-black text-[#0a2e1f] mb-2 tracking-tighter">{stat.value}</div>
+              <div className="text-xs text-[#0a2e1f]/70 font-black tracking-[0.3em] uppercase">{stat.label}</div>
+              <div className="mt-8 h-1 w-12 bg-[#0a2e1f]/20 mx-auto rounded-full group-hover:w-20 group-hover:bg-[#0a2e1f] transition-all duration-500" />
             </div>
           ))}
         </motion.div>
