@@ -55,11 +55,11 @@ export function RoleCard({
 
       {/* Image */}
       <div className={reverse ? 'md:col-start-1 md:row-start-1' : ''}>
-        <div className="relative rounded-2xl overflow-hidden shadow-2xl max-w-xs mx-auto">
+        <div className="relative rounded-2xl overflow-hidden shadow-2xl max-w-lg mx-auto">
           <img
             src={imageUrl}
             alt={title}
-            className="w-full h-auto object-cover"
+            className="w-full h-[450px] object-cover object-top"
           />
           <div className={`absolute inset-0 bg-gradient-to-t ${gradient} opacity-20`} />
         </div>

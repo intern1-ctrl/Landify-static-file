@@ -1,4 +1,4 @@
-import { PageBanner } from '../components/PageBanner';
+import { FileText } from 'lucide-react';
 import { motion } from 'motion/react';
 
 const IMAGES = {
@@ -8,11 +8,37 @@ const IMAGES = {
 export function Terms() {
   return (
     <div>
-      <PageBanner
-        title="Terms & Conditions"
-        subtitle="Please read these terms carefully before participating in our ecosystem"
-        imageUrl={IMAGES.banner}
-      />
+      {/* Terms Header */}
+      <section className="relative min-h-[40vh] flex items-center pt-24 overflow-hidden bg-slate-50">
+        {/* Abstract Background Shapes */}
+        <div className="absolute top-[-10%] right-[-5%] w-[40%] h-[120%] bg-emerald-100/50 rounded-full blur-3xl z-0" />
+        <div className="absolute bottom-[-20%] left-[-10%] w-[50%] h-[100%] bg-blue-50/50 rounded-full blur-3xl z-0" />
+
+        <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 w-full text-center">
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6 }}
+          >
+            <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-slate-200 text-slate-600 font-bold text-xs uppercase tracking-widest mb-6">
+              <FileText className="size-3" />
+              <span>Legal Framework</span>
+            </div>
+            <h1 className="text-5xl md:text-7xl font-bold text-slate-900 mb-6 drop-shadow-sm">
+              Terms & <span className="text-emerald-600">Conditions</span>
+            </h1>
+            <p className="text-lg text-slate-600 max-w-3xl mx-auto leading-relaxed">
+              Establishing a foundation of transparency, mutual respect, and operational integrity
+              within our agricultural ecosystem.
+            </p>
+          </motion.div>
+        </div>
+
+        {/* Floating Document Icon */}
+        <div className="absolute left-1/2 bottom-[-40px] -translate-x-1/2 opacity-[0.03] pointer-events-none">
+          <FileText className="size-64 text-slate-900" />
+        </div>
+      </section>
 
       <section className="py-20 bg-white">
         <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -53,7 +79,7 @@ export function Terms() {
                 <h3 className="text-xl font-semibold text-gray-900 mb-3">3.1 Land Lease Agreement</h3>
                 <ul className="space-y-2 text-gray-700 mb-4">
                   <li>• Lease period is fixed at one (1) year from the date of agreement</li>
-                  <li>• Annual lease payment of ₹1,00,000 (One Lakh Rupees) per farmer</li>
+                  <li>• Annual lease payment of ₹1,00,000 (One Lakh Rupees) per Acre</li>
                   <li>• Payment to be made within 30 days of agreement signing</li>
                   <li>• Land must be suitable for green grass cultivation</li>
                 </ul>

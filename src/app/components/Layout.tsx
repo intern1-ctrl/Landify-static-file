@@ -1,18 +1,28 @@
 import { Link, useLocation } from 'react-router-dom';
-import { Sprout, Menu, X, MapPin, Phone, Mail } from 'lucide-react';
-import { useState } from 'react';
+import { Menu, X, MapPin, Phone, Mail, Home as HomeIcon, Info, Workflow, Users } from 'lucide-react';
+import logo from '../../assets/logo.png';
+import { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'motion/react';
 
 export function Layout({ children }: { children: React.ReactNode }) {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+  const [isScrolled, setIsScrolled] = useState(false);
   const location = useLocation();
 
+  useEffect(() => {
+    const handleScroll = () => {
+      setIsScrolled(window.scrollY > 10);
+    };
+    window.addEventListener('scroll', handleScroll);
+    return () => window.removeEventListener('scroll', handleScroll);
+  }, []);
+
   const navLinks = [
-    { path: '/', label: 'Home' },
-    { path: '/about', label: 'About Us' },
-    { path: '/process', label: 'Process' },
-    { path: '/roles', label: 'Roles' },
-    { path: '/contact', label: 'Contact' },
+    { path: '/', label: 'Home', icon: HomeIcon },
+    { path: '/about', label: 'About Us', icon: Info },
+    { path: '/process', label: 'Process', icon: Workflow },
+    { path: '/roles', label: 'Roles', icon: Users },
+    { path: '/contact', label: 'Contact', icon: Phone },
   ];
 
   const isActive = (path: string) => location.pathname === path;
@@ -20,38 +30,38 @@ export function Layout({ children }: { children: React.ReactNode }) {
   return (
     <div className="min-h-screen flex flex-col bg-white">
       {/* Header */}
-      <header className="sticky top-0 z-50 bg-white/95 backdrop-blur-md border-b border-green-100 shadow-sm">
-        <nav className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <header
+        className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${isScrolled ? 'bg-white shadow-md py-2' : 'bg-transparent py-4'
+          }`}
+      >
+        <nav className="w-full px-4 sm:px-6 lg:px-8">
           <div className="flex justify-between items-center h-20">
             {/* Logo */}
-            <Link to="/" className="flex items-center gap-2 group">
-              <div className="bg-gradient-to-br from-green-600 to-green-800 p-2.5 rounded-xl group-hover:scale-105 transition-transform">
-                <Sprout className="size-7 text-white" />
-              </div>
-              <span className="text-2xl font-bold bg-gradient-to-r from-green-700 to-green-900 bg-clip-text text-transparent">
-                Landify
-              </span>
+            <Link to="/" className="flex items-center gap-2 group z-50">
+              <img
+                src={logo}
+                alt="Landify Logo"
+                className={`transition-all duration-300 object-contain group-hover:scale-105 drop-shadow-lg ${isScrolled ? 'h-40' : 'h-40'
+                  }`}
+              />
             </Link>
 
             {/* Desktop Navigation */}
-            <div className="hidden md:flex items-center gap-8">
+            <div className={`hidden md:flex items-center gap-1 backdrop-blur-md rounded-full px-2 py-1 ml-auto border transition-all duration-300 ${isScrolled
+              ? 'bg-green-50/50 border-green-100 shadow-sm'
+              : 'bg-white/10 border-white/20 shadow-lg'
+              }`}>
               {navLinks.map((link) => (
                 <Link
                   key={link.path}
                   to={link.path}
-                  className={`relative px-3 py-2 transition-colors ${isActive(link.path)
-                      ? 'text-green-700'
-                      : 'text-gray-600 hover:text-green-600'
+                  className={`relative px-3 py-2 rounded-full transition-all duration-300 flex items-center gap-2 font-bold text-sm group drop-shadow-sm ${isActive(link.path)
+                    ? 'bg-green-600 text-white shadow-md'
+                    : `${(isScrolled || location.pathname === '/roles' || location.pathname === '/about' || location.pathname === '/process') ? 'text-slate-900' : 'text-white'} hover:bg-black/5 hover:text-green-800`
                     }`}
                 >
-                  {link.label}
-                  {isActive(link.path) && (
-                    <motion.div
-                      layoutId="activeTab"
-                      className="absolute bottom-0 left-0 right-0 h-0.5 bg-green-600"
-                      transition={{ type: 'spring', stiffness: 380, damping: 30 }}
-                    />
-                  )}
+                  <link.icon className={`size-4 transition-transform group-hover:scale-110 ${isActive(link.path) ? 'text-white' : (isScrolled || location.pathname === '/roles' || location.pathname === '/about' || location.pathname === '/process' ? 'text-green-800' : 'text-white')}`} />
+                  <span>{link.label}</span>
                 </Link>
               ))}
             </div>
@@ -78,15 +88,15 @@ export function Layout({ children }: { children: React.ReactNode }) {
                 exit={{ opacity: 0, height: 0 }}
                 className="md:hidden overflow-hidden"
               >
-                <div className="py-4 space-y-2">
+                <div className="py-4 space-y-1 bg-white rounded-2xl shadow-xl border border-green-100/50 mt-2 px-2">
                   {navLinks.map((link) => (
                     <Link
                       key={link.path}
                       to={link.path}
                       onClick={() => setMobileMenuOpen(false)}
                       className={`block px-4 py-3 rounded-lg transition-colors ${isActive(link.path)
-                          ? 'bg-green-50 text-green-700'
-                          : 'text-gray-600 hover:bg-green-50 hover:text-green-600'
+                        ? 'bg-green-50 text-green-700'
+                        : 'text-gray-600 hover:bg-green-50 hover:text-green-600'
                         }`}
                     >
                       {link.label}
@@ -105,30 +115,29 @@ export function Layout({ children }: { children: React.ReactNode }) {
       </main>
 
       {/* Footer */}
-      <footer className="bg-gradient-to-br from-green-900 via-green-800 to-green-900 text-white">
+      <footer className="bg-[#0a0f1a] text-white">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12 items-start">
             {/* About */}
-            <div>
-              <div className="flex items-center gap-2 mb-4">
-                <Sprout className="size-8 text-green-300" />
-                <span className="text-xl font-bold">Landify</span>
+            <div className="flex flex-col">
+              <div className="mb-6 -ml-4">
+                <img src={logo} alt="Landify Logo" className="h-56 w-auto object-contain" />
               </div>
-              <p className="text-green-100 text-sm leading-relaxed">
+              <p className="text-gray-400 text-sm leading-relaxed max-w-xs font-medium">
                 Cultivating sustainable agriculture through a structured village ecosystem.
                 Empowering farmers, agents, and field officers across 40+ villages.
               </p>
             </div>
 
             {/* Quick Links */}
-            <div>
-              <h3 className="font-semibold mb-4 text-green-100">Quick Links</h3>
-              <ul className="space-y-2 text-sm">
+            <div className="flex flex-col pt-16">
+              <h3 className="text-sm font-black text-white mb-8 uppercase tracking-[0.2em]">Quick Links</h3>
+              <ul className="space-y-4 text-sm">
                 {navLinks.map((link) => (
                   <li key={link.path}>
                     <Link
                       to={link.path}
-                      className="text-green-200 hover:text-white transition-colors"
+                      className="text-gray-400 hover:text-green-500 transition-colors font-medium"
                     >
                       {link.label}
                     </Link>
@@ -138,13 +147,13 @@ export function Layout({ children }: { children: React.ReactNode }) {
             </div>
 
             {/* Legal */}
-            <div>
-              <h3 className="font-semibold mb-4 text-green-100 uppercase tracking-wider text-xs">Legal</h3>
+            <div className="flex flex-col pt-16">
+              <h3 className="text-sm font-black text-white mb-8 uppercase tracking-[0.2em]">Legal</h3>
               <ul className="space-y-3 text-sm">
                 <li>
                   <Link
                     to="/terms"
-                    className="text-green-200 hover:text-white transition-colors"
+                    className="text-gray-400 hover:text-green-500 transition-colors font-medium"
                   >
                     Terms & Conditions
                   </Link>
@@ -152,7 +161,7 @@ export function Layout({ children }: { children: React.ReactNode }) {
                 <li>
                   <Link
                     to="/privacy"
-                    className="text-green-200 hover:text-white transition-colors"
+                    className="text-gray-400 hover:text-green-500 transition-colors font-medium"
                   >
                     Privacy Policy
                   </Link>
@@ -161,24 +170,24 @@ export function Layout({ children }: { children: React.ReactNode }) {
             </div>
 
             {/* Contact Us */}
-            <div>
-              <h3 className="font-semibold mb-6 text-green-100 uppercase tracking-wider text-xs">Contact Us</h3>
-              <ul className="space-y-4 text-sm">
-                <li className="flex items-start gap-3">
-                  <MapPin className="size-5 text-green-400 flex-shrink-0" />
-                  <span className="text-green-100">
+            <div className="flex flex-col pt-16">
+              <h3 className="text-sm font-black text-white mb-8 uppercase tracking-[0.2em]">Contact Us</h3>
+              <ul className="space-y-6 text-sm">
+                <li className="flex items-start gap-4">
+                  <MapPin className="size-5 text-green-500 flex-shrink-0 mt-1" />
+                  <span className="text-gray-400">
                     206, 2nd floor, Block-A, PSR Prime Tower, Beside DLF, Gachibowli
                   </span>
                 </li>
-                <li className="flex items-center gap-3">
-                  <Phone className="size-5 text-green-400 flex-shrink-0" />
-                  <a href="tel:+917702710290" className="text-green-100 hover:text-white transition-colors">
+                <li className="flex items-center gap-4">
+                  <Phone className="size-5 text-green-500 flex-shrink-0" />
+                  <a href="tel:+917702710290" className="text-gray-400 hover:text-green-500 transition-colors font-medium">
                     +91 77027 10290
                   </a>
                 </li>
-                <li className="flex items-center gap-3">
-                  <Mail className="size-5 text-green-400 flex-shrink-0" />
-                  <a href="mailto:contact@markwave.ai" className="text-green-100 hover:text-white transition-colors">
+                <li className="flex items-center gap-4">
+                  <Mail className="size-5 text-green-500 flex-shrink-0" />
+                  <a href="mailto:contact@markwave.ai" className="text-gray-400 hover:text-green-500 transition-colors font-medium">
                     contact@markwave.ai
                   </a>
                 </li>
@@ -186,7 +195,7 @@ export function Layout({ children }: { children: React.ReactNode }) {
             </div>
           </div>
 
-          <div className="mt-8 pt-8 border-t border-green-700 text-center text-sm text-green-200">
+          <div className="mt-8 pt-8 border-t border-white/5 text-center text-sm text-gray-500">
             <p>&copy; {new Date().getFullYear()} Landify. All rights reserved.</p>
           </div>
         </div>

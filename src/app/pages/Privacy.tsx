@@ -1,4 +1,4 @@
-import { PageBanner } from '../components/PageBanner';
+import { Shield } from 'lucide-react';
 import { motion } from 'motion/react';
 
 const IMAGES = {
@@ -8,11 +8,42 @@ const IMAGES = {
 export function Privacy() {
   return (
     <div>
-      <PageBanner
-        title="Privacy Policy"
-        subtitle="How we collect, use, and protect your information"
-        imageUrl={IMAGES.banner}
-      />
+      {/* Privacy Header */}
+      <section className="relative min-h-[40vh] flex items-center pt-24 overflow-hidden bg-white">
+        {/* Background Accents */}
+        <div className="absolute top-0 right-0 w-1/3 h-full bg-gradient-to-l from-blue-50 to-transparent z-0" />
+        <div className="absolute bottom-0 left-0 w-1/4 h-2/3 bg-gradient-to-tr from-green-50 to-transparent z-0" />
+
+        <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 w-full">
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6 }}
+            className="max-w-3xl"
+          >
+            <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-blue-100 text-blue-700 font-bold text-xs uppercase tracking-widest mb-6">
+              <Shield className="size-3" />
+              <span>Security & Trust</span>
+            </div>
+            <h1 className="text-4xl md:text-6xl font-black text-gray-900 mb-6 font-display">
+              Privacy <span className="text-blue-600">Policy</span>
+            </h1>
+            <p className="text-xl text-gray-600 leading-relaxed max-w-2xl">
+              We value your trust above all else. This document outlines how we protect
+              your data and maintain the integrity of our digital ecosystem.
+            </p>
+          </motion.div>
+        </div>
+
+        {/* Decorative Floating Icon */}
+        <motion.div
+          animate={{ y: [0, -10, 0] }}
+          transition={{ repeat: Infinity, duration: 4 }}
+          className="absolute right-10 top-32 hidden lg:block opacity-10"
+        >
+          <Shield className="size-64 text-blue-900" />
+        </motion.div>
+      </section>
 
       <section className="py-20 bg-white">
         <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -39,7 +70,7 @@ export function Privacy() {
 
               <section>
                 <h2 className="text-3xl font-bold text-gray-900 mb-4">2. Information We Collect</h2>
-                
+
                 <h3 className="text-xl font-semibold text-gray-900 mb-3">2.1 Personal Information</h3>
                 <ul className="space-y-2 text-gray-700 mb-4">
                   <li>• Full name and contact details</li>
@@ -83,7 +114,7 @@ export function Privacy() {
 
               <section>
                 <h2 className="text-3xl font-bold text-gray-900 mb-4">4. Information Sharing</h2>
-                
+
                 <h3 className="text-xl font-semibold text-gray-900 mb-3">4.1 Within the Ecosystem</h3>
                 <p className="text-gray-700 leading-relaxed mb-4">
                   Information is shared among farmers, agents, field officers, and investors as

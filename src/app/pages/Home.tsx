@@ -12,29 +12,33 @@ import {
   ChevronDown
 } from 'lucide-react';
 
-import farm3 from '../../assets/farm3.jpeg';
+import farm3 from '../../assets/farm2.jpeg';
 import farm4 from '../../assets/farm4.jpeg';
 import farm6 from '../../assets/farm6.jpeg';
+import farm5 from '../../assets/farm7.png';
+import farm8 from '../../assets/farm3.jpeg';
+import background from '../../assets/background.png';
 
 const IMAGES = {
-  hero: 'https://images.unsplash.com/photo-1761055277862-c0962cb4c8ae?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxncmVlbiUyMGdyYXNzJTIwZmllbGQlMjBzdW5saWdodCUyMGFncmljdWx0dXJlfGVufDF8fHx8MTc3MDI5NzAxNnww&ixlib=rb-4.1.0&q=80&w=1080',
-  farmer: 'https://images.unsplash.com/photo-1629288465751-07e42186084f?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxmYXJtZXIlMjB3b3JraW5nJTIwZmllbGQlMjBpbmRpYXxlbnwxfHx8fDE3NzAyOTcwMTd8MA&ixlib=rb-4.1.0&q=80&w=1080',
-  officer: farm3,
-  tractor: farm4,
-  sustainable: 'https://images.unsplash.com/photo-1757525473930-0b82237e55ac?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxzdXN0YWluYWJsZSUyMGFncmljdWx0dXJlJTIwZ3JlZW4lMjBmYXJtaW5nfGVufDF8fHx8MTc3MDI5NzAxOHww&ixlib=rb-4.1.0&q=80&w=1080',
+  hero: background,
+  farmer: farm3,
+  officer: farm4,
+  tractor: farm5,
+  sustainable: farm8,
 };
 
 export function Home() {
   return (
     <div>
       {/* Hero Section */}
-      <section className="relative h-[85vh] overflow-hidden">
-        {/* Background Image */}
-        <div
-          className="absolute inset-0 bg-cover bg-top"
-          style={{ backgroundImage: `url(${IMAGES.hero})` }}
-        >
-          <div className="absolute inset-0 bg-gradient-to-r from-green-900/85 via-green-800/70 to-transparent" />
+      <section className="relative h-screen overflow-hidden">
+        {/* Background Image & Overlay */}
+        <div className="absolute inset-0 z-0">
+          <div
+            className="absolute inset-0 bg-cover bg-center transition-transform duration-[2s] hover:scale-105"
+            style={{ backgroundImage: `url(${IMAGES.hero})` }}
+          />
+          <div className="absolute inset-0 bg-black/40" />
         </div>
 
         {/* Content */}
@@ -45,43 +49,34 @@ export function Home() {
             transition={{ duration: 0.8 }}
             className="max-w-3xl"
           >
-            <motion.div
-              initial={{ opacity: 0, scale: 0.9 }}
-              animate={{ opacity: 1, scale: 1 }}
-              transition={{ delay: 0.2 }}
-              className="inline-flex items-center gap-2 bg-white/10 backdrop-blur-md px-4 py-2 rounded-full text-white mb-6 border border-white/20"
-            >
-              <Leaf className="size-4" />
-              <span className="text-sm">Sustainable Agriculture Ecosystem</span>
-            </motion.div>
 
-            <h1 className="text-5xl md:text-7xl font-bold text-white mb-6 leading-tight">
-              Cultivating Green Grass,
-              <span className="block text-green-300">Growing Communities</span>
+
+            <h1 className="text-6xl md:text-9xl font-black text-white mb-6 tracking-tight overflow-hidden">
+              {"LANDIFY".split("").map((char, i) => (
+                <motion.span
+                  key={i}
+                  initial={{ y: 100, opacity: 0 }}
+                  animate={{ y: 0, opacity: 1 }}
+                  transition={{
+                    delay: 0.5 + i * 0.1,
+                    duration: 0.8,
+                    ease: [0.2, 0.65, 0.3, 0.9],
+                  }}
+                  className="inline-block text-transparent bg-clip-text bg-gradient-to-b from-white via-white to-green-200 drop-shadow-[0_4px_12px_rgba(0,0,0,0.5)] filter brightness-110"
+                >
+                  {char}
+                </motion.span>
+              ))}
             </h1>
 
-            <p className="text-xl md:text-2xl text-green-50 mb-8 leading-relaxed">
+            <p className="text-xl md:text-2xl text-white mb-8 leading-relaxed drop-shadow-lg font-medium">
               A premium agricultural business connecting field officers, agents, and farmers
               across 40+ villages in a structured, sustainable ecosystem.
             </p>
 
             <div className="flex flex-wrap gap-4">
-              <motion.a
-                href="#lifecycle"
-                whileHover={{ scale: 1.05 }}
-                whileTap={{ scale: 0.95 }}
-                className="px-8 py-4 bg-white text-green-800 rounded-full font-semibold shadow-xl hover:shadow-2xl transition-shadow"
-              >
-                Explore Our Process
-              </motion.a>
-              <motion.a
-                href="#roles"
-                whileHover={{ scale: 1.05 }}
-                whileTap={{ scale: 0.95 }}
-                className="px-8 py-4 bg-green-600/20 backdrop-blur-md text-white rounded-full font-semibold border-2 border-white/30 hover:bg-green-600/30 transition-colors"
-              >
-                Learn More
-              </motion.a>
+
+
             </div>
           </motion.div>
 
@@ -97,60 +92,71 @@ export function Home() {
         </div>
       </section>
 
-      {/* Values Section */}
-      <section className="py-20 bg-white">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      {/* Values Section - Unique Organic Design */}
+      <section className="relative py-24 bg-[#FCF9F1] overflow-hidden">
+        {/* Decorative Background Symbol */}
+        <div className="absolute top-0 right-0 w-96 h-96 bg-green-100/50 rounded-full blur-3xl -mr-48 -mt-48" />
+        <div className="absolute bottom-0 left-0 w-96 h-96 bg-blue-100/50 rounded-full blur-3xl -ml-48 -mb-48" />
+
+        <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
-            className="text-center mb-16"
+            className="text-center mb-20"
           >
-            <h2 className="text-4xl font-bold text-gray-900 mb-4">
-              Why Choose Landify
+
+            <h2 className="text-5xl md:text-6xl font-black text-[#1a2e1a] mb-6 tracking-tight">
+              Why Choose <span className="text-green-600">Landify</span>
             </h2>
-            <p className="text-xl text-gray-600 max-w-3xl mx-auto">
-              Premium, trustworthy, and investor-ready agricultural solutions
+            <div className="w-24 h-1.5 bg-green-600 mx-auto rounded-full mb-8" />
+            <p className="text-xl text-gray-700 max-w-3xl mx-auto font-medium">
+              Premium, trustworthy, and investor-ready agricultural solutions built for the future.
             </p>
           </motion.div>
 
-          <div className="grid md:grid-cols-3 gap-8">
+          <div className="grid md:grid-cols-3 gap-10">
             {[
               {
                 icon: Shield,
                 title: 'Trustworthy',
-                description: 'Transparent operations with verified data tracking across all stages',
-                gradient: 'from-blue-600 to-blue-700',
+                description: 'Transparent operations with verified data tracking across all stages of the lifecycle.',
+                bg: 'bg-blue-50',
+                border: 'border-blue-200',
+                iconBg: 'bg-blue-600'
               },
               {
                 icon: Sprout,
                 title: 'Sustainable',
-                description: 'Eco-friendly practices ensuring long-term agricultural health',
-                gradient: 'from-green-600 to-green-700',
+                description: 'Eco-friendly practices ensuring long-term agricultural health and soil vitality.',
+                bg: 'bg-green-50',
+                border: 'border-green-200',
+                iconBg: 'bg-green-600'
               },
               {
                 icon: Target,
                 title: 'Investor-Ready',
-                description: 'Professional structure with clear ROI and organized delivery',
-                gradient: 'from-purple-600 to-purple-700',
+                description: 'Professional structure with clear ROI and organized delivery systems.',
+                bg: 'bg-purple-50',
+                border: 'border-purple-200',
+                iconBg: 'bg-purple-600'
               },
             ].map((value, index) => (
               <motion.div
                 key={index}
-                initial={{ opacity: 0, y: 20 }}
+                initial={{ opacity: 0, y: 30 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
-                transition={{ delay: index * 0.1 }}
-                whileHover={{ y: -5 }}
-                className="bg-gradient-to-br from-gray-50 to-white p-8 rounded-2xl shadow-lg border border-gray-100 hover:shadow-xl transition-all"
+                transition={{ delay: index * 0.2 }}
+                className={`relative group ${value.bg} p-10 rounded-[2.5rem] border-2 ${value.border} shadow-sm hover:shadow-2xl hover:-translate-y-3 transition-all duration-500`}
               >
-                <div className={`w-16 h-16 rounded-xl bg-gradient-to-br ${value.gradient} flex items-center justify-center mb-6`}>
-                  <value.icon className="size-8 text-white" />
+                <div className={`w-20 h-20 rounded-3xl ${value.iconBg} flex items-center justify-center mb-8 shadow-lg transform group-hover:rotate-6 transition-transform`}>
+                  <value.icon className="size-10 text-white" />
                 </div>
-                <h3 className="text-2xl font-bold text-gray-900 mb-3">
+                <h3 className="text-3xl font-black text-gray-900 mb-4 tracking-tight">
                   {value.title}
                 </h3>
-                <p className="text-gray-600 leading-relaxed">
+                <p className="text-gray-600 leading-relaxed text-lg font-medium">
                   {value.description}
                 </p>
               </motion.div>
@@ -171,7 +177,7 @@ export function Home() {
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
-            className="text-center mb-16"
+            className="text-center mb-8"
           >
             <h2 className="text-4xl font-bold text-gray-900 mb-4">
               Our Ecosystem
@@ -232,61 +238,71 @@ export function Home() {
         </div>
       </section>
 
-      {/* Logistics Section */}
-      <section className="py-20 bg-gradient-to-br from-green-50 to-gray-50">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="grid md:grid-cols-2 gap-12 items-center">
+      {/* Logistics Section - Unique Industrial Theme */}
+      <section className="relative py-24 bg-[#57BA98] overflow-hidden">
+        {/* Tech/Grid Background Pattern */}
+        <div className="absolute inset-0 opacity-10" style={{ backgroundImage: 'radial-gradient(#3AAFA9 1px, transparent 1px)', backgroundSize: '30px 30px' }} />
+
+        <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="grid lg:grid-cols-2 gap-20 items-center">
             <motion.div
-              initial={{ opacity: 0, x: -30 }}
+              initial={{ opacity: 0, x: -50 }}
               whileInView={{ opacity: 1, x: 0 }}
               viewport={{ once: true }}
+              transition={{ duration: 0.8 }}
             >
-              <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-gradient-to-r from-amber-600 to-amber-700 mb-6">
-                <TruckIcon className="size-5 text-white" />
-                <span className="text-white font-semibold">Logistics & Delivery</span>
-              </div>
 
-              <h2 className="text-4xl font-bold text-gray-900 mb-6">
-                Safe & Reliable Transportation
+
+              <h2 className="text-5xl md:text-6xl font-black text-white mb-8 tracking-tight leading-tight">
+                Precision <span className="text-amber-500">Logistics</span> & Fast Delivery
               </h2>
 
-              <p className="text-lg text-gray-700 mb-6 leading-relaxed">
-                Our organized delivery process ensures green grass bundles reach investors
-                safely and on time through dedicated tractor transport.
+              <p className="text-xl text-gray-400 mb-10 leading-relaxed font-medium">
+                Our optimized transportation network ensures that every bundle of green grass is tracked
+                and delivered with architectural precision across rural terrains.
               </p>
 
-              <ul className="space-y-4">
+              <div className="grid sm:grid-cols-2 gap-6">
                 {[
-                  'Harvested grass cut into uniform bundles',
-                  'Quality inspection before transport',
-                  'Dedicated tractor fleet for rural roads',
-                  'GPS tracking for all deliveries',
-                  'Direct delivery to investor locations',
-                  'Documentation and proof of delivery',
+                  { text: 'Uniform Bundling', sub: 'Precision cutting' },
+                  { text: 'Quality Control', sub: 'Pre-load inspection' },
+                  { text: 'Tractor Fleet', sub: 'Rural terrain ready' },
+                  { text: 'Real-time Tracking', sub: 'GPS coordinated' },
                 ].map((item, index) => (
-                  <li key={index} className="flex items-start gap-3">
-                    <div className="w-6 h-6 rounded-full bg-amber-100 flex items-center justify-center flex-shrink-0 mt-0.5">
-                      <div className="w-2 h-2 rounded-full bg-amber-600" />
+                  <div key={index} className="flex items-center gap-4 bg-slate-800/40 p-4 rounded-xl border border-white/10 hover:border-amber-500/40 transition-colors">
+                    <div className="w-12 h-12 rounded-lg bg-amber-500 flex items-center justify-center flex-shrink-0">
+                      <div className="w-2 h-2 rounded-full bg-white animate-pulse" />
                     </div>
-                    <span className="text-gray-700">{item}</span>
-                  </li>
+                    <div>
+                      <div className="text-white font-bold">{item.text}</div>
+                      <div className="text-gray-500 text-sm whitespace-nowrap">{item.sub}</div>
+                    </div>
+                  </div>
                 ))}
-              </ul>
+              </div>
             </motion.div>
 
             <motion.div
-              initial={{ opacity: 0, x: 30 }}
-              whileInView={{ opacity: 1, x: 0 }}
+              initial={{ opacity: 0, scale: 0.9 }}
+              whileInView={{ opacity: 1, scale: 1 }}
               viewport={{ once: true }}
               className="relative"
             >
-              <div className="relative rounded-2xl overflow-hidden shadow-2xl max-w-xs mx-auto">
+              {/* Decorative Frame */}
+              <div className="absolute -inset-4 border-2 border-amber-500/20 rounded-3xl" />
+              <div className="absolute top-0 right-0 -mr-6 -mt-6 size-24 border-t-4 border-r-4 border-amber-500 opacity-30" />
+              <div className="absolute bottom-0 left-0 -ml-6 -mb-6 size-24 border-b-4 border-l-4 border-amber-500 opacity-30" />
+
+              <div className="relative rounded-2xl overflow-hidden shadow-[0_0_50px_rgba(245,158,11,0.2)] max-w-lg mx-auto border-4 border-[#1e293b]">
                 <img
                   src={IMAGES.tractor}
                   alt="Tractor Transportation"
-                  className="w-full h-auto object-cover"
+                  className="w-full h-[450px] object-cover object-top transition-all duration-500"
                 />
-                <div className="absolute inset-0 bg-gradient-to-t from-amber-900/30 to-transparent" />
+
+
+                {/* Status Badge */}
+
               </div>
             </motion.div>
           </div>

@@ -1,5 +1,5 @@
 import { PageBanner } from '../components/PageBanner';
-import { LifecycleFlow } from '../components/LifecycleFlow';
+
 import { motion } from 'motion/react';
 import { FileText, CheckCircle2, AlertCircle } from 'lucide-react';
 
@@ -10,122 +10,167 @@ const IMAGES = {
 export function Process() {
   return (
     <div>
-      <PageBanner
-        title="Our Process"
-        subtitle="A transparent, step-by-step journey from field to delivery"
-        imageUrl={IMAGES.banner}
-      />
+      {/* Process Header */}
+      <section className="relative h-screen flex items-center pt-24 overflow-hidden" style={{ backgroundColor: '#AC8968' }}>
+        {/* Background Layer removed top shadow as requested */}
+        <div className="absolute inset-0 z-0" />
 
-      {/* Main Lifecycle */}
-      <LifecycleFlow />
+        <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 w-full">
+          <div className="grid lg:grid-cols-2 gap-16 items-center">
+            {/* Left Side: Smaller Staggered Uniform Boxes */}
+            <div className="order-2 lg:order-1 grid grid-cols-2 gap-4 items-start max-w-md">
+              {[
+                { text: 'Setup', delay: 0.2, icon: FileText },
+                { text: 'Cultivation', delay: 0.4, icon: CheckCircle2 },
+                { text: 'Harvesting', delay: 0.6, icon: AlertCircle },
+                { text: 'Logistics', delay: 0.8, icon: CheckCircle2 },
+                { text: 'Reporting', delay: 1.0, icon: FileText },
+                { text: 'Verification', delay: 1.2, icon: CheckCircle2 }
+              ].map((item, i) => (
+                <motion.div
+                  key={i}
+                  initial={{ opacity: 0, y: 20 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ delay: item.delay, duration: 0.5 }}
+                  className="w-full bg-[#3AAFA9]/40 backdrop-blur-md p-5 rounded-xl border border-white/40 shadow-xl group hover:bg-[#0a2e1f]/60 transition-all flex flex-col items-center text-center"
+                >
+                  <item.icon className="size-7 text-white mb-3 group-hover:scale-110 transition-transform" />
+                  <span className="text-white font-bold tracking-tight text-base">{item.text}</span>
+                </motion.div>
+              ))}
+            </div>
 
-      {/* Detailed Process Steps */}
-      <section className="py-20 bg-white">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            {/* Right Side: Title & Paragraph */}
+            <div className="order-1 lg:order-2 text-center lg:text-left">
+              <motion.div
+                initial={{ opacity: 0, x: 50 }}
+                animate={{ opacity: 1, x: 0 }}
+                transition={{ duration: 0.8 }}
+              >
+                <h1 className="text-6xl md:text-8xl font-black text-white mb-6 drop-shadow-2xl leading-[0.9]">
+                  Process
+                </h1>
+
+                <p className="text-xl text-orange-50 font-medium leading-relaxed max-w-xl mx-auto lg:mx-0">
+                  A transparent, efficient, and meticulously verified journey.
+                  We've optimized every hectare for maximum output and minimal waste.
+                  Our process ensures quality at every step, from initial setup to final delivery.
+                </p>
+              </motion.div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+
+
+      {/* Detailed Process Steps - Unique Phased Road Design */}
+      <section className="relative py-24 bg-[#FCFBF8] overflow-hidden">
+        {/* Subtle Path Geometry */}
+        <div className="absolute top-0 bottom-0 left-1/2 -translate-x-1/2 w-1 bg-gradient-to-b from-transparent via-gray-200 to-transparent hidden lg:block" />
+
+        <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
-            className="text-center mb-16"
+            className="text-center mb-12"
           >
-            <h2 className="text-4xl font-bold text-gray-900 mb-4">
-              Detailed Process Overview
+            <h2 className="text-5xl font-black text-[#4A3728] mb-6 tracking-tighter uppercase font-serif italic">
+              Operational <span className="text-[#865D36]">Blueprint</span>
             </h2>
-            <p className="text-xl text-gray-600 max-w-3xl mx-auto">
-              Every step is documented, verified, and optimized for transparency
-            </p>
+            <p className="text-xl text-gray-500 font-bold tracking-[0.2em] uppercase">Meticulous Execution Roadmap</p>
           </motion.div>
 
-          <div className="space-y-8">
+          <div className="space-y-32">
             {[
               {
-                phase: 'Phase 1',
-                title: 'Initial Setup & Land Lease',
+                phase: 'PHASE 01',
+                title: 'Strategic Onboarding',
                 steps: [
-                  'Field Officer identifies target villages and coordinates with local authorities',
-                  'Agents are assigned to specific village clusters for focused operations',
-                  'Farmers are contacted and land suitability is assessed',
-                  'One-year lease agreements are signed with ₹1 lakh annual payment',
-                  'Land preparation begins with soil testing and fertilizer planning',
+                  'Field Officer village clustering and cluster mapping',
+                  'Agent specialized region assignment',
+                  'Farming Land high-precision suitability audit',
+                  'Secure 1-Year Contract with ₹1L Guaranteed Payout',
+                  'Initial Soil pH and Mineral enrichment planning',
                 ],
-                color: 'blue',
+                color: '#3B82F6',
               },
               {
-                phase: 'Phase 2',
-                title: 'Cultivation & Maintenance',
+                phase: 'PHASE 02',
+                title: 'Cultivation Lifecycle',
                 steps: [
-                  'Farmers cultivate green grass using their own resources',
-                  'Regular fertilizer and pesticide application as per schedule',
-                  'Daily irrigation management based on weather conditions',
-                  'Agents maintain detailed daily records of all activities',
-                  'Field Officers conduct periodic quality inspections',
+                  'Traditional expertise applied to grass cultivation',
+                  'Scientifically curated fertilizer deployment',
+                  'Precision irrigation based on real-time atmospheric data',
+                  'Daily activity logs synced with regional hubs',
+                  'Unannounced Field Officer quality inspections',
                 ],
-                color: 'green',
+                color: '#10B981',
               },
               {
-                phase: 'Phase 3',
-                title: 'Harvesting & Quality Control',
+                phase: 'PHASE 03',
+                title: 'Precision Harvesting',
                 steps: [
-                  'Grass maturity assessment by Field Officers',
-                  'Harvesting schedule coordinated with transportation team',
-                  'Grass cut into uniform bundles for easy handling',
-                  'Quality inspection ensures only premium grass proceeds',
-                  'Bundles prepared for safe transportation',
+                  'Phase-based maturity assessment and marking',
+                  'Logistics fleet coordination via GPS routing',
+                  'Uniform bundling for standardized volume control',
+                  'Secondary quality-sieve inspection at source',
+                  'Safe bundle preparation for rough terrain transport',
                 ],
-                color: 'amber',
+                color: '#F59E0B',
               },
               {
-                phase: 'Phase 4',
-                title: 'Transportation & Delivery',
+                phase: 'PHASE 04',
+                title: 'Streamlined Delivery',
                 steps: [
-                  'Tractor fleet mobilized for collection from villages',
-                  'GPS tracking enabled for all transportation vehicles',
-                  'Bundles loaded securely for rural road conditions',
-                  'Direct delivery to investor locations',
-                  'Documentation and proof of delivery completed',
+                  'Rapid fleet mobilization for same-day collection',
+                  'Real-time GPS tracking for investor visibility',
+                  'Secure bundle anchoring for rural transit',
+                  'Direct-to-Hub delivery with zero intermediate handling',
+                  'Digital Proof of Delivery (PoD) with timestamping',
                 ],
-                color: 'purple',
-              },
-              {
-                phase: 'Phase 5',
-                title: 'Reporting & Payment',
-                steps: [
-                  'Field Officer compiles comprehensive reports',
-                  'Data verification and quality assessment',
-                  'Investor reports sent with delivery confirmation',
-                  'Payment processing for all stakeholders',
-                  'Feedback collection for continuous improvement',
-                ],
-                color: 'indigo',
+                color: '#8B5CF6',
               },
             ].map((section, index) => (
               <motion.div
                 key={index}
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
+                initial={{ opacity: 0, x: index % 2 === 0 ? -50 : 50 }}
+                whileInView={{ opacity: 1, x: 0 }}
                 viewport={{ once: true }}
-                transition={{ delay: index * 0.1 }}
-                className="bg-gradient-to-br from-gray-50 to-white rounded-2xl p-8 shadow-lg border border-gray-100"
+                className={`relative flex items-center ${index % 2 === 0 ? 'lg:flex-row' : 'lg:flex-row-reverse'} gap-12 lg:gap-24`}
               >
-                <div className="flex items-start gap-4">
-                  <div className={`flex-shrink-0 w-12 h-12 rounded-xl bg-gradient-to-br from-${section.color}-600 to-${section.color}-700 flex items-center justify-center text-white font-bold`}>
-                    {index + 1}
-                  </div>
-                  <div className="flex-1">
-                    <div className={`inline-block px-3 py-1 rounded-full bg-${section.color}-100 text-${section.color}-700 text-sm font-semibold mb-3`}>
-                      {section.phase}
+                {/* Visual Connector Dot */}
+                <div className="absolute top-0 left-1/2 -translate-x-1/2 size-8 bg-white border-4 border-gray-100 rounded-full z-20 hidden lg:block" />
+
+                <div className="w-full lg:w-1/2">
+                  <div
+                    className="p-10 rounded-[3rem] bg-white shadow-2xl border-t-8 transition-transform hover:scale-[1.02] duration-500"
+                    style={{ borderTopColor: section.color }}
+                  >
+                    <div className="flex items-center gap-4 mb-8">
+                      <div
+                        className="px-4 py-1 rounded-full text-white font-black text-xs tracking-widest"
+                        style={{ backgroundColor: section.color }}
+                      >
+                        {section.phase}
+                      </div>
+                      <h3 className="text-3xl font-black text-[#4A3728] tracking-tight">{section.title}</h3>
                     </div>
-                    <h3 className="text-2xl font-bold text-gray-900 mb-4">
-                      {section.title}
-                    </h3>
-                    <ul className="space-y-3">
+                    <ul className="space-y-4">
                       {section.steps.map((step, i) => (
-                        <li key={i} className="flex items-start gap-3">
-                          <CheckCircle2 className={`size-5 text-${section.color}-600 flex-shrink-0 mt-0.5`} />
-                          <span className="text-gray-700">{step}</span>
+                        <li key={i} className="flex gap-4 group">
+                          <CheckCircle2 className="size-6 shrink-0" style={{ color: section.color }} />
+                          <span className="text-gray-600 font-semibold leading-snug group-hover:text-black transition-colors">{step}</span>
                         </li>
                       ))}
                     </ul>
+                  </div>
+                </div>
+
+                <div className="hidden lg:flex w-1/2 justify-center">
+                  <div className="text-[12rem] font-black opacity-[0.03] select-none" style={{ color: section.color }}>
+                    0{index + 1}
                   </div>
                 </div>
               </motion.div>
@@ -134,72 +179,77 @@ export function Process() {
         </div>
       </section>
 
-      {/* Quality Assurance */}
-      <section className="py-20 bg-gradient-to-br from-green-50 to-gray-50">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      {/* Quality Assurance - Unique Precision Lab Design */}
+      <section className="relative py-24 bg-[#123C69] overflow-hidden">
+        {/* Technical Grid Overlay */}
+        <div className="absolute inset-0 opacity-10" style={{ backgroundImage: 'radial-gradient(#ffffff 1px, transparent 1px)', backgroundSize: '30px 30px' }} />
+
+        <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
-            className="text-center mb-12"
+            className="text-center mb-20"
           >
-            <h2 className="text-4xl font-bold text-gray-900 mb-4">
-              Quality Assurance
+            <h2 className="text-5xl font-black text-white mb-6 tracking-tighter uppercase italic">
+              Verification <span className="text-green-500">Integrity</span>
             </h2>
+            <div className="flex items-center justify-center gap-6">
+              <div className="h-px w-24 bg-gradient-to-r from-transparent to-green-500/50" />
+              <AlertCircle className="size-8 text-green-500" />
+              <div className="h-px w-24 bg-gradient-to-l from-transparent to-green-500/50" />
+            </div>
           </motion.div>
 
-          <div className="grid md:grid-cols-2 gap-8">
-            <motion.div
-              initial={{ opacity: 0, x: -20 }}
-              whileInView={{ opacity: 1, x: 0 }}
-              viewport={{ once: true }}
-              className="bg-white rounded-2xl p-8 shadow-lg border border-gray-100"
-            >
-              <FileText className="size-12 text-green-600 mb-4" />
-              <h3 className="text-2xl font-bold text-gray-900 mb-4">
-                Documentation Standards
-              </h3>
-              <ul className="space-y-3">
-                {[
-                  'Daily activity logs maintained by agents',
-                  'Photo documentation of cultivation stages',
-                  'Digital records of fertilizer and water usage',
-                  'Quality inspection certificates',
-                  'Delivery receipts with timestamps',
-                ].map((item, i) => (
-                  <li key={i} className="flex items-start gap-3">
-                    <div className="w-1.5 h-1.5 rounded-full bg-green-600 mt-2 flex-shrink-0" />
-                    <span className="text-gray-700">{item}</span>
-                  </li>
-                ))}
-              </ul>
-            </motion.div>
-
-            <motion.div
-              initial={{ opacity: 0, x: 20 }}
-              whileInView={{ opacity: 1, x: 0 }}
-              viewport={{ once: true }}
-              className="bg-white rounded-2xl p-8 shadow-lg border border-gray-100"
-            >
-              <AlertCircle className="size-12 text-amber-600 mb-4" />
-              <h3 className="text-2xl font-bold text-gray-900 mb-4">
-                Verification Process
-              </h3>
-              <ul className="space-y-3">
-                {[
-                  'Field Officer inspections at multiple stages',
-                  'Cross-verification of agent reports',
-                  'Third-party quality assessments',
-                  'Investor feedback integration',
-                  'Continuous improvement based on data',
-                ].map((item, i) => (
-                  <li key={i} className="flex items-start gap-3">
-                    <div className="w-1.5 h-1.5 rounded-full bg-amber-600 mt-2 flex-shrink-0" />
-                    <span className="text-gray-700">{item}</span>
-                  </li>
-                ))}
-              </ul>
-            </motion.div>
+          <div className="grid md:grid-cols-2 gap-12">
+            {[
+              {
+                icon: FileText,
+                title: 'Data Governance',
+                items: [
+                  'Unalterable daily activity logs',
+                  'Timestamped visual documentation',
+                  'Digital resource consumption tracking',
+                  'Verified quality certificates',
+                  'Blockchain-ready delivery receipts'
+                ],
+                color: 'green'
+              },
+              {
+                icon: AlertCircle,
+                title: 'Audit Protocols',
+                items: [
+                  'Multi-stage Field Officer scrutiny',
+                  'Algorithmic report cross-verification',
+                  'Independent quality assessments',
+                  'Investor-direct feedback loops',
+                  'Data-driven efficiency optimization'
+                ],
+                color: 'amber'
+              },
+            ].map((box, index) => (
+              <motion.div
+                key={index}
+                initial={{ opacity: 0, y: 30 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ delay: index * 0.1 }}
+                className="group relative bg-slate-900/60 backdrop-blur-xl p-12 rounded-[3rem] border border-white/10 hover:border-green-500/30 transition-all shadow-2xl"
+              >
+                <div className={`size-20 rounded-2xl bg-${box.color}-500/10 flex items-center justify-center mb-10 border border-${box.color}-500/20 group-hover:scale-110 transition-transform`}>
+                  <box.icon className={`size-10 text-${box.color}-400`} />
+                </div>
+                <h3 className="text-3xl font-black text-white mb-8 tracking-tight uppercase">{box.title}</h3>
+                <ul className="space-y-5">
+                  {box.items.map((item, i) => (
+                    <li key={i} className="flex items-center gap-4 text-green-100/60 font-medium group/item">
+                      <div className={`size-2 rounded-full bg-${box.color}-500 group-hover/item:scale-150 transition-transform shadow-[0_0_10px_rgba(34,197,94,0.5)]`} />
+                      {item}
+                    </li>
+                  ))}
+                </ul>
+              </motion.div>
+            ))}
           </div>
         </div>
       </section>
