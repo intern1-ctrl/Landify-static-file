@@ -202,7 +202,7 @@ export function Roles() {
                 <h3 className="text-2xl font-black text-white mb-4 tracking-tight">
                   {item.title}
                 </h3>
-                <p className="text-gray-400 leading-relaxed font-medium">
+                <p className="text-gray-300 leading-relaxed font-bold">
                   {item.description}
                 </p>
               </motion.div>

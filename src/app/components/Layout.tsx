@@ -123,7 +123,7 @@ export function Layout({ children }: { children: React.ReactNode }) {
               <div className="mb-6 -ml-4">
                 <img src={logo} alt="Landify Logo" className="h-56 w-auto object-contain" />
               </div>
-              <p className="text-gray-400 text-sm leading-relaxed max-w-xs font-medium">
+              <p className="text-gray-300 text-sm leading-relaxed max-w-xs font-semibold">
                 Cultivating sustainable agriculture through a structured village ecosystem.
                 Empowering farmers, agents, and field officers across 40+ villages.
               </p>
@@ -137,7 +137,7 @@ export function Layout({ children }: { children: React.ReactNode }) {
                   <li key={link.path}>
                     <Link
                       to={link.path}
-                      className="text-gray-400 hover:text-green-500 transition-colors font-medium"
+                      className="text-gray-300 hover:text-green-400 transition-colors font-semibold"
                     >
                       {link.label}
                     </Link>
@@ -153,7 +153,7 @@ export function Layout({ children }: { children: React.ReactNode }) {
                 <li>
                   <Link
                     to="/terms"
-                    className="text-gray-400 hover:text-green-500 transition-colors font-medium"
+                    className="text-gray-300 hover:text-green-400 transition-colors font-semibold"
                   >
                     Terms & Conditions
                   </Link>
@@ -161,7 +161,7 @@ export function Layout({ children }: { children: React.ReactNode }) {
                 <li>
                   <Link
                     to="/privacy"
-                    className="text-gray-400 hover:text-green-500 transition-colors font-medium"
+                    className="text-gray-300 hover:text-green-400 transition-colors font-semibold"
                   >
                     Privacy Policy
                   </Link>
@@ -175,19 +175,19 @@ export function Layout({ children }: { children: React.ReactNode }) {
               <ul className="space-y-6 text-sm">
                 <li className="flex items-start gap-4">
                   <MapPin className="size-5 text-green-500 flex-shrink-0 mt-1" />
-                  <span className="text-gray-400">
+                  <span className="text-gray-300 font-medium">
                     206, 2nd floor, Block-A, PSR Prime Tower, Beside DLF, Gachibowli
                   </span>
                 </li>
                 <li className="flex items-center gap-4">
                   <Phone className="size-5 text-green-500 flex-shrink-0" />
-                  <a href="tel:+917702710290" className="text-gray-400 hover:text-green-500 transition-colors font-medium">
+                  <a href="tel:+917702710290" className="text-gray-300 hover:text-green-400 transition-colors font-semibold">
                     +91 77027 10290
                   </a>
                 </li>
                 <li className="flex items-center gap-4">
                   <Mail className="size-5 text-green-500 flex-shrink-0" />
-                  <a href="mailto:contact@markwave.ai" className="text-gray-400 hover:text-green-500 transition-colors font-medium">
+                  <a href="mailto:contact@markwave.ai" className="text-gray-300 hover:text-green-400 transition-colors font-semibold">
                     contact@markwave.ai
                   </a>
                 </li>

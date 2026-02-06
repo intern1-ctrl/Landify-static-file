@@ -60,7 +60,7 @@ export function LifecycleFlow() {
         >
 
           <h2 className="text-5xl font-black text-white mb-6 uppercase tracking-tighter">
-            The <span className="text-green-500 italic">Landify</span> Lifecycle
+            The <span className="text-amber-400 italic">Landify</span> Lifecycle
           </h2>
           <p className="text-xl text-white/70 max-w-2xl mx-auto font-medium leading-relaxed">
             A high-precision journey from governance to global delivery.
@@ -140,13 +140,13 @@ export function LifecycleFlow() {
                   <h3 className="text-2xl font-black text-white mb-2 uppercase tracking-tight">
                     {step.title}
                   </h3>
-                  <p className="text-green-500/60 font-bold text-xs mb-4 tracking-widest uppercase">
+                  <p className="text-green-400 font-bold text-xs mb-4 tracking-widest uppercase">
                     {step.description}
                   </p>
                   <ul className="grid grid-cols-1 gap-3">
                     {step.details.map((detail, i) => (
-                      <li key={i} className="text-sm text-gray-400 flex items-start gap-3">
-                        <div className="size-2 rounded-full bg-green-600 mt-1.5 flex-shrink-0" />
+                      <li key={i} className="text-sm text-gray-200 flex items-start gap-3">
+                        <div className="size-2 rounded-full bg-green-500 mt-1.5 flex-shrink-0" />
                         <span>{detail}</span>
                       </li>
                     ))}
@@ -172,8 +172,8 @@ export function LifecycleFlow() {
             <div key={i} className="relative group p-10 bg-[#57BA98] rounded-[3rem] border border-white/20 hover:bg-[#4ea889] transition-all text-center shadow-2xl">
               <stat.icon className="size-12 text-white mx-auto mb-6 group-hover:scale-125 transition-transform" />
               <div className="text-5xl font-black text-[#0a2e1f] mb-2 tracking-tighter">{stat.value}</div>
-              <div className="text-xs text-[#0a2e1f]/70 font-black tracking-[0.3em] uppercase">{stat.label}</div>
-              <div className="mt-8 h-1 w-12 bg-[#0a2e1f]/20 mx-auto rounded-full group-hover:w-20 group-hover:bg-[#0a2e1f] transition-all duration-500" />
+              <div className="text-xs text-[#0a2e1f] font-black tracking-[0.3em] uppercase">{stat.label}</div>
+              <div className="mt-8 h-1 w-12 bg-[#0a2e1f]/40 mx-auto rounded-full group-hover:w-20 group-hover:bg-[#0a2e1f] transition-all duration-500" />
             </div>
           ))}
         </motion.div>

@@ -76,7 +76,7 @@ export function About() {
             >
 
               <h2 className="text-5xl md:text-6xl font-black text-[#0a2e1f] mb-8 leading-tight tracking-tight">
-                Transforming <span className="text-green-600 underline underline-offset-8">Landscape</span> <br /> & Lives
+                Transforming <span className="text-amber-600 underline underline-offset-8">Landscape</span> <br /> & Lives
               </h2>
               <div className="space-y-6 text-gray-700 leading-relaxed text-lg font-medium">
                 <p className="pl-6 border-l-4 border-green-600 italic text-xl text-gray-800">
@@ -125,9 +125,9 @@ export function About() {
               viewport={{ once: true }}
               className="p-12 md:p-24 border-r border-white/10 flex flex-col justify-center group hover:bg-white/5 transition-colors"
             >
-              <Eye className="size-20 text-white mb-8 transform group-hover:scale-110 transition-transform" />
-              <h3 className="text-white text-5xl font-black mb-8 tracking-tighter uppercase">Our Vision</h3>
-              <p className="text-white/90 text-2xl leading-relaxed font-bold tracking-tight">
+              <Eye className="size-20 text-[#0a2e1f] mb-8 transform group-hover:scale-110 transition-transform" />
+              <h3 className="text-[#0a2e1f] text-5xl font-black mb-8 tracking-tighter uppercase">Our Vision</h3>
+              <p className="text-[#0a2e1f]/90 text-2xl leading-relaxed font-bold tracking-tight">
                 To become India's most trusted sustainable agriculture network,
                 connecting rural abundance with modern investment horizons.
               </p>
@@ -140,9 +140,9 @@ export function About() {
               viewport={{ once: true }}
               className="p-12 md:p-24 flex flex-col justify-center group hover:bg-white/5 transition-colors"
             >
-              <Target className="size-20 text-white mb-8 transform group-hover:scale-110 transition-transform" />
-              <h3 className="text-white text-5xl font-black mb-8 tracking-tighter uppercase">Our Mission</h3>
-              <p className="text-white/90 text-2xl leading-relaxed font-bold tracking-tight">
+              <Target className="size-20 text-[#0a2e1f] mb-8 transform group-hover:scale-110 transition-transform" />
+              <h3 className="text-[#0a2e1f] text-5xl font-black mb-8 tracking-tighter uppercase">Our Mission</h3>
+              <p className="text-[#0a2e1f]/90 text-2xl leading-relaxed font-bold tracking-tight">
                 Empowering farmers through structured management and high-quality
                 cultivation standards that deliver absolute reliability.
               </p>
@@ -241,10 +241,10 @@ export function About() {
                 transition={{ delay: index * 0.1 }}
                 className="text-center relative group"
               >
-                <div className="text-6xl md:text-7xl font-black text-white mb-4 tracking-tighter block group-hover:text-green-400 transition-colors drop-shadow-[0_0_15px_rgba(34,197,94,0.3)]">
+                <div className="text-6xl md:text-7xl font-black text-white mb-4 tracking-tighter block group-hover:text-amber-300 transition-colors drop-shadow-[0_4px_8px_rgba(0,0,0,0.3)]">
                   {stat.value}
                 </div>
-                <div className="text-[#0a2e1f] font-bold text-xs tracking-[0.3em] uppercase">
+                <div className="text-[#0a2e1f] font-black text-xs tracking-[0.3em] uppercase">
                   {stat.label}
                 </div>
                 <div className="mt-4 w-12 h-1 bg-green-500/20 mx-auto rounded-full group-hover:w-20 group-hover:bg-green-500 transition-all duration-500" />

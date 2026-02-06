@@ -75,7 +75,7 @@ export function Contact() {
       </section>
 
       {/* Info & Form Section - Unique High-Tech Design */}
-      <section className="relative py-24 bg-[#57BA98] overflow-hidden">
+      <section id="contact-form" className="relative min-h-screen flex items-center py-12 bg-[#57BA98] overflow-hidden">
         {/* Dynamic Data Lines */}
         <div className="absolute top-0 right-0 w-full h-px bg-gradient-to-r from-transparent via-green-500/20 to-transparent" />
         <div className="absolute bottom-0 left-0 w-full h-px bg-gradient-to-r from-transparent via-green-500/20 to-transparent" />
@@ -92,34 +92,34 @@ export function Contact() {
 
 
               <h2 className="text-5xl font-black text-white mb-8 tracking-tighter uppercase leading-tight">
-                Get in <span className="text-green-500">Immediate</span> <br /> Strategic Contact
+                Get in <span className="text-amber-400">Immediate</span> <br /> Strategic Contact
               </h2>
 
-              <p className="text-xl text-white mb-12 leading-relaxed font-bold italic border-l-4 border-green-600 pl-6">
+              <p className="text-lg text-white mb-8 leading-relaxed font-bold italic border-l-4 border-green-600 pl-6">
                 Direct access to our operational hubs. Whether you're a farmer, investor,
                 or agent, your communication is our priority.
               </p>
 
-              <div className="space-y-10">
+              <div className="space-y-6">
                 {[
                   { icon: Mail, label: 'Email Protocol', value: 'contact@markwave.ai', color: 'green' },
                   { icon: Phone, label: 'Voice Link', value: '+91 77027 10290', color: 'blue' },
                   { icon: MapPin, label: 'Strategic HQ', value: 'Prime Tower, Gachibowli', color: 'purple' },
                 ].map((item, idx) => (
-                  <div key={idx} className="flex items-center gap-6 group">
-                    <div className={`w-14 h-14 rounded-2xl bg-${item.color}-500/10 border border-${item.color}-500/20 flex items-center justify-center group-hover:bg-${item.color}-500 group-hover:scale-110 transition-all duration-500`}>
-                      <item.icon className="size-7 text-white transition-colors" />
+                  <div key={idx} className="flex items-center gap-5 group">
+                    <div className={`w-12 h-12 rounded-xl bg-${item.color}-500/10 border border-${item.color}-500/20 flex items-center justify-center group-hover:bg-${item.color}-500 group-hover:scale-110 transition-all duration-500`}>
+                      <item.icon className="size-6 text-white transition-colors" />
                     </div>
                     <div>
-                      <div className="text-[#0a2e1f] font-black text-xs uppercase tracking-widest mb-1">{item.label}</div>
-                      <div className="text-white text-xl font-black group-hover:text-[#0a2e1f] transition-colors uppercase tracking-tight">{item.value}</div>
+                      <div className="text-[#0a2e1f] font-black text-[10px] uppercase tracking-widest mb-0.5">{item.label}</div>
+                      <div className="text-white text-lg font-black group-hover:text-amber-300 transition-colors uppercase tracking-tight">{item.value}</div>
                     </div>
                   </div>
                 ))}
               </div>
 
-              <div className="mt-16 p-8 bg-white/5 rounded-3xl border border-white/10 backdrop-blur-sm">
-                <h3 className="text-green-500 font-black text-xs uppercase tracking-[0.4em] mb-4">Uptime & Availability</h3>
+              <div className="mt-10 p-6 bg-white/5 rounded-2xl border border-white/10 backdrop-blur-sm">
+                <h3 className="text-amber-400 font-black text-xs uppercase tracking-[0.4em] mb-4">Uptime & Availability</h3>
                 <div className="grid grid-cols-2 gap-4">
                   <div className="text-white">
                     <div className="text-lg font-black">MON - FRI</div>
@@ -143,26 +143,26 @@ export function Contact() {
               {/* Decorative Frame */}
               <div className="absolute -inset-4 border border-white/5 rounded-[2rem]" />
 
-              <div className="relative bg-slate-900/60 backdrop-blur-2xl p-10 rounded-3xl border border-white/10 shadow-2xl">
+              <div className="relative bg-slate-900/60 backdrop-blur-2xl p-8 rounded-3xl border border-white/10 shadow-2xl">
                 <h3 className="text-3xl font-black text-white mb-8 tracking-tighter uppercase">
-                  Terminal <span className="text-green-500">Input</span>
+                  Terminal <span className="text-amber-400">Input</span>
                 </h3>
 
                 <form onSubmit={handleSubmit} className="space-y-8">
                   <div className="grid md:grid-cols-2 gap-8">
                     <div className="space-y-2">
-                      <label className="text-green-500 font-bold text-[10px] uppercase tracking-[0.3em]">Full Identity</label>
+                      <label className="text-amber-300 font-bold text-[10px] uppercase tracking-[0.3em]">Full Identity</label>
                       <input
                         type="text"
                         required
                         value={formData.name}
-                        onChange={(e) => setFormData({ ...formData, name: e.target.value })}
+                        onChange={(e) => setFormData({ ...formData, name: e.target.value.replace(/[^a-zA-Z\s]/g, '') })}
                         className="w-full bg-white/5 border-b border-white/20 px-0 py-3 text-white focus:outline-none focus:border-green-500 transition-colors font-medium text-lg placeholder:text-white/10"
                         placeholder="ENTER NAME"
                       />
                     </div>
                     <div className="space-y-2">
-                      <label className="text-green-500 font-bold text-[10px] uppercase tracking-[0.3em]">Digital Mail</label>
+                      <label className="text-amber-300 font-bold text-[10px] uppercase tracking-[0.3em]">Digital Mail</label>
                       <input
                         type="email"
                         required
@@ -175,7 +175,7 @@ export function Contact() {
                   </div>
 
                   <div className="space-y-2">
-                    <label className="text-green-500 font-bold text-[10px] uppercase tracking-[0.3em]">Select Protocol</label>
+                    <label className="text-amber-300 font-bold text-[10px] uppercase tracking-[0.3em]">Select Protocol</label>
                     <select
                       required
                       value={formData.role}
@@ -191,7 +191,7 @@ export function Contact() {
                   </div>
 
                   <div className="space-y-2">
-                    <label className="text-green-500 font-bold text-[10px] uppercase tracking-[0.3em]">Detailed Inquiry</label>
+                    <label className="text-amber-300 font-bold text-[10px] uppercase tracking-[0.3em]">Detailed Inquiry</label>
                     <textarea
                       required
                       value={formData.message}
@@ -206,10 +206,10 @@ export function Contact() {
                     type="submit"
                     whileHover={{ scale: 1.02, backgroundColor: '#22c55e' }}
                     whileTap={{ scale: 0.98 }}
-                    className="w-full py-5 bg-white text-[#0a2e1f] rounded-xl font-black text-xs uppercase tracking-[0.5em] shadow-[0_20px_40px_rgba(0,0,0,0.3)] transition-all flex items-center justify-center gap-3"
+                    className="w-full py-4 bg-white text-[#0a2e1f] rounded-xl font-black text-xs uppercase tracking-[0.5em] shadow-[0_20px_40px_rgba(0,0,0,0.3)] transition-all flex items-center justify-center gap-3"
                   >
                     <Send className="size-4" />
-                    Initialize Link
+                    Initialize
                   </motion.button>
                 </form>
               </div>
@@ -259,7 +259,7 @@ export function Contact() {
                 <div className="text-5xl font-black text-[#0a2e1f] group-hover:text-white mb-2 transition-colors">
                   {stat.value}
                 </div>
-                <div className="text-gray-400 group-hover:text-green-400 font-bold text-[10px] uppercase tracking-widest transition-colors mb-4">
+                <div className="text-slate-600 group-hover:text-green-400 font-black text-[10px] uppercase tracking-widest transition-colors mb-4">
                   {stat.label}
                 </div>
                 <div className="w-8 h-1 bg-green-600/20 mx-auto rounded-full group-hover:w-16 group-hover:bg-green-600 transition-all duration-500" />

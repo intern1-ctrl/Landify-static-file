@@ -107,7 +107,7 @@ export function Home() {
           >
 
             <h2 className="text-5xl md:text-6xl font-black text-[#1a2e1a] mb-6 tracking-tight">
-              Why Choose <span className="text-green-600">Landify</span>
+              Why Choose <span className="text-[#0a2e1f]">Landify</span>
             </h2>
             <div className="w-24 h-1.5 bg-green-600 mx-auto rounded-full mb-8" />
             <p className="text-xl text-gray-700 max-w-3xl mx-auto font-medium">
@@ -254,7 +254,7 @@ export function Home() {
 
 
               <h2 className="text-5xl md:text-6xl font-black text-white mb-8 tracking-tight leading-tight">
-                Precision <span className="text-amber-500">Logistics</span> & Fast Delivery
+                Precision <span className="text-amber-400">Logistics</span> & Fast Delivery
               </h2>
 
               <p className="text-xl text-[#0a2e1f] mb-10 leading-relaxed font-bold">
@@ -275,7 +275,7 @@ export function Home() {
                     </div>
                     <div>
                       <div className="text-[#0a2e1f] font-black">{item.text}</div>
-                      <div className="text-[#0a2e1f]/60 text-sm whitespace-nowrap font-bold">{item.sub}</div>
+                      <div className="text-[#0a2e1f]/90 text-sm whitespace-nowrap font-black">{item.sub}</div>
                     </div>
                   </div>
                 ))}

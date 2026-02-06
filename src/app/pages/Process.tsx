@@ -192,7 +192,7 @@ export function Process() {
             className="text-center mb-20"
           >
             <h2 className="text-5xl font-black text-white mb-6 tracking-tighter uppercase italic">
-              Verification <span className="text-green-500">Integrity</span>
+              Verification <span className="text-amber-400">Integrity</span>
             </h2>
             <div className="flex items-center justify-center gap-6">
               <div className="h-px w-24 bg-gradient-to-r from-transparent to-green-500/50" />
@@ -242,8 +242,8 @@ export function Process() {
                 <h3 className="text-3xl font-black text-white mb-8 tracking-tight uppercase">{box.title}</h3>
                 <ul className="space-y-5">
                   {box.items.map((item, i) => (
-                    <li key={i} className="flex items-center gap-4 text-gray-300 font-medium group/item">
-                      <div className={`size-2 rounded-full bg-${box.color}-500 group-hover/item:scale-150 transition-transform shadow-[0_0_10px_rgba(34,197,94,0.5)]`} />
+                    <li key={i} className="flex items-center gap-4 text-white font-medium group/item">
+                      <div className={`size-2 rounded-full bg-${box.color}-500 group-hover/item:scale-150 transition-transform shadow-[0_0_10px_rgba(245,158,11,0.5)]`} />
                       {item}
                     </li>
                   ))}
