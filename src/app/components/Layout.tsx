@@ -196,7 +196,7 @@ export function Layout({ children }: { children: React.ReactNode }) {
           </div>
 
           <div className="mt-8 pt-8 border-t border-white/5 text-center text-sm text-gray-500">
-            <p>&copy; {new Date().getFullYear()} Landify. All rights reserved.</p>
+            <p>&copy; {new Date().getFullYear()} LANDIFY INDIA PRIVATE LIMITED. All rights reserved.</p>
           </div>
         </div>
       </footer>

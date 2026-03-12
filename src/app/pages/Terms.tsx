@@ -57,8 +57,8 @@ export function Terms() {
               <section>
                 <h2 className="text-3xl font-bold text-gray-900 mb-4">1. Introduction</h2>
                 <p className="text-gray-700 leading-relaxed">
-                  These Terms and Conditions ("Terms") govern your participation in the Landify
-                  agricultural ecosystem. By engaging with Landify as a Farmer, Agent, Field Officer,
+                  These Terms and Conditions ("Terms") govern your participation in the LANDIFY INDIA PRIVATE LIMITED
+                  agricultural ecosystem. By engaging with LANDIFY INDIA PRIVATE LIMITED as a Farmer, Agent, Field Officer,
                   or Investor, you agree to abide by these Terms.
                 </p>
               </section>
@@ -66,7 +66,7 @@ export function Terms() {
               <section>
                 <h2 className="text-3xl font-bold text-gray-900 mb-4">2. Definitions</h2>
                 <ul className="space-y-3 text-gray-700">
-                  <li><strong>Landify:</strong> The agricultural business entity operating the green grass cultivation ecosystem.</li>
+                  <li><strong>LANDIFY INDIA PRIVATE LIMITED:</strong> The agricultural business entity operating the green grass cultivation ecosystem.</li>
                   <li><strong>Farmer:</strong> Individual or entity leasing agricultural land for grass cultivation.</li>
                   <li><strong>Agent:</strong> Individual or entity coordinating between farmers and field officers.</li>
                   <li><strong>Field Officer:</strong> Individual or entity managing operations across multiple villages.</li>
@@ -159,7 +159,7 @@ export function Terms() {
               <section>
                 <h2 className="text-3xl font-bold text-gray-900 mb-4">9. Liability</h2>
                 <p className="text-gray-700 leading-relaxed">
-                  Landify is not liable for natural disasters, crop failures due to weather conditions,
+                  LANDIFY INDIA PRIVATE LIMITED is not liable for natural disasters, crop failures due to weather conditions,
                   or other acts of God. All parties agree to share reasonable risks associated with
                   agricultural operations.
                 </p>
@@ -177,7 +177,7 @@ export function Terms() {
               <section>
                 <h2 className="text-3xl font-bold text-gray-900 mb-4">11. Amendments</h2>
                 <p className="text-gray-700 leading-relaxed">
-                  Landify reserves the right to modify these Terms at any time. Participants will
+                  LANDIFY INDIA PRIVATE LIMITED reserves the right to modify these Terms at any time. Participants will
                   be notified of changes via email or official communication channels.
                 </p>
               </section>
@@ -185,8 +185,8 @@ export function Terms() {
               <section>
                 <h2 className="text-3xl font-bold text-gray-900 mb-4">12. Contact Information</h2>
                 <p className="text-gray-700 leading-relaxed">
-                  For questions about these Terms, please contact us at legal@landify.com or
-                  call +91 12345 67890.
+                  For questions about these Terms, please contact us at contact@markwave.ai or
+                  call +91 77027 10290.
                 </p>
               </section>
             </div>

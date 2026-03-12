@@ -62,7 +62,7 @@ export function Privacy() {
               <section>
                 <h2 className="text-3xl font-bold text-gray-900 mb-4">1. Introduction</h2>
                 <p className="text-gray-700 leading-relaxed">
-                  Landify ("we", "us", or "our") is committed to protecting your privacy. This
+                  LANDIFY INDIA PRIVATE LIMITED ("we", "us", or "our") is committed to protecting your privacy. This
                   Privacy Policy explains how we collect, use, disclose, and safeguard your
                   information when you participate in our agricultural ecosystem.
                 </p>
@@ -205,9 +205,9 @@ export function Privacy() {
                 </p>
                 <div className="bg-gradient-to-br from-green-50 to-gray-50 p-6 rounded-2xl border border-gray-100">
                   <ul className="space-y-2 text-gray-700">
-                    <li><strong>Email:</strong> privacy@landify.com</li>
-                    <li><strong>Phone:</strong> +91 12345 67890</li>
-                    <li><strong>Address:</strong> Agricultural Innovation Hub, Rural Development Center</li>
+                    <li><strong>Email:</strong> contact@markwave.ai</li>
+                    <li><strong>Phone:</strong> +91 77027 10290</li>
+                    <li><strong>Address:</strong> 206, 2nd floor, Block-A, PSR Prime Tower, Beside DLF, Gachibowli</li>
                   </ul>
                 </div>
               </section>
@@ -215,7 +215,7 @@ export function Privacy() {
               <section>
                 <h2 className="text-3xl font-bold text-gray-900 mb-4">12. Consent</h2>
                 <p className="text-gray-700 leading-relaxed">
-                  By participating in the Landify ecosystem, you consent to the collection and use
+                  By participating in the LANDIFY INDIA PRIVATE LIMITED ecosystem, you consent to the collection and use
                   of your information as described in this Privacy Policy.
                 </p>
               </section>
