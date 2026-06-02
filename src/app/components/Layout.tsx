@@ -1,5 +1,5 @@
 import { Link, useLocation } from 'react-router-dom';
-import { Menu, X, MapPin, Phone, Mail, Home as HomeIcon, Info, Workflow, Users } from 'lucide-react';
+import { Menu, X, MapPin, Phone, Mail, Home as HomeIcon, Info, Workflow, Users, BookOpen } from 'lucide-react';
 import logo from '../../assets/logo.png';
 import { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'motion/react';
@@ -18,11 +18,12 @@ export function Layout({ children }: { children: React.ReactNode }) {
   }, []);
 
   const navLinks = [
-    { path: '/', label: 'Home', icon: HomeIcon },
-    { path: '/about', label: 'About Us', icon: Info },
-    { path: '/process', label: 'Process', icon: Workflow },
-    { path: '/roles', label: 'Roles', icon: Users },
-    { path: '/contact', label: 'Contact', icon: Phone },
+    { path: '/', label: 'Home', icon: HomeIcon, subLabel: 'Main Hub' },
+    { path: '/about', label: 'About Us', icon: Info, subLabel: 'Our Mission' },
+    { path: '/process', label: 'Process', icon: Workflow, subLabel: 'How it works' },
+    { path: '/roles', label: 'Roles', icon: Users, subLabel: 'Ecosystem' },
+    { path: '/blog', label: 'Blog', icon: BookOpen, subLabel: 'Insights' },
+    { path: '/contact', label: 'Contact', icon: Phone, subLabel: 'Get In Touch' },
   ];
 
   const isActive = (path: string) => location.pathname === path;
@@ -47,20 +48,35 @@ export function Layout({ children }: { children: React.ReactNode }) {
             </Link>
 
             {/* Desktop Navigation */}
-            <div className={`hidden md:flex items-center gap-1 backdrop-blur-md rounded-full px-2 py-1 ml-auto border transition-all duration-300 ${isScrolled
-              ? 'bg-green-50/50 border-green-100 shadow-sm'
+            <div className={`hidden md:flex items-center gap-1.5 backdrop-blur-md rounded-full px-2.5 py-1.5 ml-auto border transition-all duration-300 ${isScrolled
+              ? 'bg-green-50/70 border-green-100 shadow-sm'
               : 'bg-white/10 border-white/20 shadow-lg'
               }`}>
               {navLinks.map((link) => (
                 <Link
                   key={link.path}
                   to={link.path}
-                  className={`relative px-3 py-2 rounded-full transition-all duration-300 flex items-center gap-2 font-bold text-sm group drop-shadow-sm ${isActive(link.path)
-                    ? 'bg-green-600 text-white shadow-md'
-                    : `${(isScrolled || location.pathname === '/roles' || location.pathname === '/about' || location.pathname === '/process') ? 'text-slate-900' : 'text-white'} hover:bg-black/5 hover:text-green-800`
+                  className={`relative px-4 py-2 rounded-full transition-all duration-300 flex items-center gap-2.5 font-bold text-sm group drop-shadow-sm z-10 ${isActive(link.path)
+                    ? 'text-white'
+                    : `${(isScrolled || location.pathname === '/roles' || location.pathname === '/about' || location.pathname === '/process') ? 'text-slate-900 hover:text-green-800' : 'text-white hover:text-green-200'}`
                     }`}
                 >
-                  <link.icon className={`size-4 transition-transform group-hover:scale-110 ${isActive(link.path) ? 'text-white' : (isScrolled || location.pathname === '/roles' || location.pathname === '/about' || location.pathname === '/process' ? 'text-green-800' : 'text-white')}`} />
+                  {isActive(link.path) && (
+                    <motion.div
+                      layoutId="activeNavBackground"
+                      className="absolute inset-0 bg-green-600 rounded-full -z-10 shadow-md"
+                      transition={{ type: 'spring', stiffness: 380, damping: 30 }}
+                    />
+                  )}
+                  <div className={`p-1 rounded-full transition-all duration-300 flex items-center justify-center ${
+                    isActive(link.path)
+                      ? 'bg-white/25 text-white'
+                      : (isScrolled || location.pathname === '/roles' || location.pathname === '/about' || location.pathname === '/process')
+                      ? 'bg-green-50 text-green-700 group-hover:bg-green-600 group-hover:text-white group-hover:rotate-6 shadow-sm'
+                      : 'bg-white/15 text-white group-hover:bg-green-600 group-hover:text-white group-hover:rotate-6 shadow-sm'
+                  }`}>
+                    <link.icon className="size-3.5 transition-transform duration-300 group-hover:scale-110" />
+                  </div>
                   <span>{link.label}</span>
                 </Link>
               ))}
@@ -69,7 +85,7 @@ export function Layout({ children }: { children: React.ReactNode }) {
             {/* Mobile Menu Button */}
             <button
               onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-              className="md:hidden p-2 rounded-lg hover:bg-green-50 transition-colors"
+              className="md:hidden p-2 rounded-xl bg-green-50/50 border border-green-100 hover:bg-green-50 transition-colors flex items-center justify-center shadow-sm"
             >
               {mobileMenuOpen ? (
                 <X className="size-6 text-green-700" />
@@ -88,18 +104,29 @@ export function Layout({ children }: { children: React.ReactNode }) {
                 exit={{ opacity: 0, height: 0 }}
                 className="md:hidden overflow-hidden"
               >
-                <div className="py-4 space-y-1 bg-white rounded-2xl shadow-xl border border-green-100/50 mt-2 px-2">
+                <div className="py-4 space-y-1.5 bg-white rounded-2xl shadow-xl border border-green-100/50 mt-2 px-2">
                   {navLinks.map((link) => (
                     <Link
                       key={link.path}
                       to={link.path}
                       onClick={() => setMobileMenuOpen(false)}
-                      className={`block px-4 py-3 rounded-lg transition-colors ${isActive(link.path)
-                        ? 'bg-green-50 text-green-700'
-                        : 'text-gray-600 hover:bg-green-50 hover:text-green-600'
+                      className={`flex items-center gap-4 px-4 py-3 rounded-2xl transition-all duration-300 group ${isActive(link.path)
+                        ? 'bg-green-50/80 text-green-800 font-extrabold shadow-sm border border-green-100/50'
+                        : 'text-gray-600 hover:bg-green-50/40 hover:text-green-600 font-semibold'
                         }`}
                     >
-                      {link.label}
+                      <div className={`w-10 h-10 rounded-xl flex items-center justify-center transition-all duration-300 ${isActive(link.path)
+                        ? 'bg-green-600 text-white shadow-md shadow-green-600/20 rotate-3'
+                        : 'bg-gray-100 text-gray-500 group-hover:bg-green-100 group-hover:text-green-700 group-hover:rotate-3'
+                        }`}>
+                        <link.icon className="size-5 transition-transform duration-300 group-hover:scale-110" />
+                      </div>
+                      <div className="flex flex-col text-left">
+                        <span className="text-sm tracking-wide font-bold">{link.label}</span>
+                        <span className="text-[10px] text-gray-400 font-medium group-hover:text-green-600/80 transition-colors uppercase tracking-widest mt-0.5">
+                          {link.subLabel}
+                        </span>
+                      </div>
                     </Link>
                   ))}
                 </div>
@@ -181,14 +208,14 @@ export function Layout({ children }: { children: React.ReactNode }) {
                 </li>
                 <li className="flex items-center gap-4">
                   <Phone className="size-5 text-green-500 flex-shrink-0" />
-                  <a href="tel:+917702710290" className="text-gray-300 hover:text-green-400 transition-colors font-semibold">
-                    +91 77027 10290
+                  <a href="tel:+917075866239" className="text-gray-300 hover:text-green-400 transition-colors font-semibold">
+                    +91 70758 66239
                   </a>
                 </li>
                 <li className="flex items-center gap-4">
                   <Mail className="size-5 text-green-500 flex-shrink-0" />
-                  <a href="mailto:contact@markwave.ai" className="text-gray-300 hover:text-green-400 transition-colors font-semibold">
-                    contact@markwave.ai
+                  <a href="mailto:contact@landify.in" className="text-gray-300 hover:text-green-400 transition-colors font-semibold">
+                    contact@landify.in
                   </a>
                 </li>
               </ul>

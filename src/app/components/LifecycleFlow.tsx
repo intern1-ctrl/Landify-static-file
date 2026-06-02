@@ -36,7 +36,7 @@ const lifecycleSteps = [
     icon: Scissors,
     title: 'Harvesting',
     description: 'Grass cutting & bundling',
-    details: ['Cut into bundles', 'Quality check', 'Prepare for transport'],
+    details: ['Cut into bundles'],
     color: 'from-amber-600 to-amber-700',
   },
   {
@@ -99,7 +99,7 @@ export function LifecycleFlow() {
                     {step.description}
                   </p>
 
-                  <ul className="space-y-3 mt-auto">
+                  <ul className="space-y-3">
                     {step.details.map((detail, i) => (
                       <li key={i} className="text-[11px] text-gray-300 flex items-start gap-2 font-medium">
                         <div className="size-1.5 rounded-full bg-green-500 mt-1 flex-shrink-0" />

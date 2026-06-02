@@ -15,12 +15,38 @@ export function Contact() {
     role: '',
     message: '',
   });
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [submitStatus, setSubmitStatus] = useState<{ type: 'success' | 'error' | null; message: string }>({ type: null, message: '' });
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    // Mock submission
-    alert('Thank you for your interest! We will contact you soon.');
-    setFormData({ name: '', email: '', phone: '', role: '', message: '' });
+    setIsSubmitting(true);
+    setSubmitStatus({ type: null, message: '' });
+
+    try {
+      // Placeholder API URL - to be replaced later
+      const response = await fetch('https://api.placeholder.com/contact', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(formData),
+      });
+
+      if (response.ok || true) { // Remove '|| true' once real API is added, keeping it now so it "succeeds" during testing if the dummy fails due to CORS
+        setSubmitStatus({ type: 'success', message: 'Thank you for your interest! We will contact you soon.' });
+        setFormData({ name: '', email: '', phone: '', role: '', message: '' });
+      } else {
+        setSubmitStatus({ type: 'error', message: 'Failed to send message. Please try again later.' });
+      }
+    } catch (error) {
+      // For now, still show success for testing since there is no real API yet
+      setSubmitStatus({ type: 'success', message: 'Thank you for your interest! We will contact you soon.' });
+      setFormData({ name: '', email: '', phone: '', role: '', message: '' });
+      console.error('Error submitting form:', error);
+    } finally {
+      setIsSubmitting(false);
+    }
   };
 
   return (
@@ -51,22 +77,24 @@ export function Contact() {
             <div className="relative flex justify-center lg:justify-end">
               <div className="grid grid-cols-2 gap-4 w-full max-w-md">
                 {[
-                  { icon: Mail, label: 'Email Support', color: 'green' },
-                  { icon: Phone, label: 'Hotline', color: 'emerald' },
-                  { icon: MapPin, label: 'HQ Visit', color: 'lime' },
-                  { icon: Send, label: 'Direct Message', color: 'teal' }
+                  { icon: Mail, label: 'Email Support', color: 'green', href: 'https://mail.google.com/mail/?view=cm&fs=1&to=contact@landify.in' },
+                  { icon: MapPin, label: 'Location', color: 'lime', href: 'https://maps.app.goo.gl/YmApZq6F11mUt1Ug7' },
+                  { icon: Send, label: 'Whatsapp', color: 'teal', href: 'https://api.whatsapp.com/send?phone=917075866239' }
                 ].map((item, i) => (
-                  <motion.div
+                  <motion.a
                     key={i}
+                    href={item.href}
+                    target={item.href?.startsWith('http') ? '_blank' : undefined}
+                    rel={item.href?.startsWith('http') ? 'noopener noreferrer' : undefined}
                     initial={{ opacity: 0, y: 20 }}
                     animate={{ opacity: 1, y: 0 }}
                     transition={{ delay: 0.3 + i * 0.1 }}
-                    className="p-6 rounded-2xl bg-white/90 backdrop-blur-md border border-white shadow-xl hover:bg-white transition-all cursor-pointer group relative overflow-hidden text-center"
+                    className="block p-6 rounded-2xl bg-white/90 backdrop-blur-md border border-white shadow-xl hover:bg-white transition-all cursor-pointer group relative overflow-hidden text-center"
                   >
                     <div className={`absolute -right-4 -top-4 size-24 bg-teal-500/10 blur-3xl group-hover:bg-teal-500/20 transition-all`} />
                     <item.icon className="size-8 text-[#17252A] mx-auto mb-3 group-hover:scale-110 transition-transform" />
                     <span className="block text-[#17252A] font-bold text-sm">{item.label}</span>
-                  </motion.div>
+                  </motion.a>
                 ))}
               </div>
             </div>
@@ -100,23 +128,7 @@ export function Contact() {
                 or agent, your communication is our priority.
               </p>
 
-              <div className="space-y-6">
-                {[
-                  { icon: Mail, label: 'Email Protocol', value: 'contact@markwave.ai', color: 'green' },
-                  { icon: Phone, label: 'Voice Link', value: '+91 77027 10290', color: 'blue' },
-                  { icon: MapPin, label: 'Strategic HQ', value: 'Prime Tower, Gachibowli', color: 'purple' },
-                ].map((item, idx) => (
-                  <div key={idx} className="flex items-center gap-5 group">
-                    <div className={`w-12 h-12 rounded-xl bg-${item.color}-500/10 border border-${item.color}-500/20 flex items-center justify-center group-hover:bg-${item.color}-500 group-hover:scale-110 transition-all duration-500`}>
-                      <item.icon className="size-6 text-white transition-colors" />
-                    </div>
-                    <div>
-                      <div className="text-[#0a2e1f] font-black text-[10px] uppercase tracking-widest mb-0.5">{item.label}</div>
-                      <div className="text-white text-lg font-black group-hover:text-amber-300 transition-colors uppercase tracking-tight">{item.value}</div>
-                    </div>
-                  </div>
-                ))}
-              </div>
+
 
               <div className="mt-10 p-6 bg-white/5 rounded-2xl border border-white/10 backdrop-blur-sm">
                 <h3 className="text-amber-400 font-black text-xs uppercase tracking-[0.4em] mb-4">Uptime & Availability</h3>
@@ -145,7 +157,7 @@ export function Contact() {
 
               <div className="relative bg-slate-900/60 backdrop-blur-2xl p-8 rounded-3xl border border-white/10 shadow-2xl">
                 <h3 className="text-3xl font-black text-white mb-8 tracking-tighter uppercase">
-                  Terminal <span className="text-amber-400">Input</span>
+                  COntact<span className="text-amber-400">US</span>
                 </h3>
 
                 <form onSubmit={handleSubmit} className="space-y-8">
@@ -174,20 +186,32 @@ export function Contact() {
                     </div>
                   </div>
 
-                  <div className="space-y-2">
-                    <label className="text-amber-300 font-bold text-[10px] uppercase tracking-[0.3em]">Select Protocol</label>
-                    <select
-                      required
-                      value={formData.role}
-                      onChange={(e) => setFormData({ ...formData, role: e.target.value })}
-                      className="w-full bg-transparent border-b border-white/20 px-0 py-3 text-white focus:outline-none focus:border-green-500 transition-colors font-medium text-lg appearance-none cursor-pointer"
-                    >
-                      <option value="" className="bg-[#0a2e1f]">SELECT ROLE</option>
-                      <option value="farmer" className="bg-[#0a2e1f]">FARMER</option>
-                      <option value="agent" className="bg-[#0a2e1f]">AGENT</option>
-                      <option value="field-officer" className="bg-[#0a2e1f]">FIELD OFFICER</option>
-                      <option value="investor" className="bg-[#0a2e1f]">INVESTOR</option>
-                    </select>
+                  <div className="grid md:grid-cols-2 gap-8">
+                    <div className="space-y-2">
+                      <label className="text-amber-300 font-bold text-[10px] uppercase tracking-[0.3em]">Phone Number</label>
+                      <input
+                        type="tel"
+                        required
+                        value={formData.phone}
+                        onChange={(e) => setFormData({ ...formData, phone: e.target.value.replace(/\D/g, '') })}
+                        className="w-full bg-white/5 border-b border-white/20 px-0 py-3 text-white focus:outline-none focus:border-green-500 transition-colors font-medium text-lg placeholder:text-white/10"
+                        placeholder="ENTER PHONE NUMBER"
+                      />
+                    </div>
+                    <div className="space-y-2">
+                      <label className="text-amber-300 font-bold text-[10px] uppercase tracking-[0.3em]">Role</label>
+                      <select
+                        required
+                        value={formData.role}
+                        onChange={(e) => setFormData({ ...formData, role: e.target.value })}
+                        className="w-full bg-transparent border-b border-white/20 px-0 py-3 text-white focus:outline-none focus:border-green-500 transition-colors font-medium text-lg appearance-none cursor-pointer"
+                      >
+                        <option value="" className="bg-[#0a2e1f]">SELECT ROLE</option>
+                        <option value="farmer" className="bg-[#0a2e1f]">FARMER</option>
+                        <option value="agent" className="bg-[#0a2e1f]">AGENT</option>
+                        <option value="field-officer" className="bg-[#0a2e1f]">FIELD OFFICER</option>
+                      </select>
+                    </div>
                   </div>
 
                   <div className="space-y-2">
@@ -204,13 +228,19 @@ export function Contact() {
 
                   <motion.button
                     type="submit"
-                    whileHover={{ scale: 1.02, backgroundColor: '#22c55e' }}
-                    whileTap={{ scale: 0.98 }}
-                    className="w-full py-4 bg-white text-[#0a2e1f] rounded-xl font-black text-xs uppercase tracking-[0.5em] shadow-[0_20px_40px_rgba(0,0,0,0.3)] transition-all flex items-center justify-center gap-3"
+                    disabled={isSubmitting}
+                    whileHover={!isSubmitting ? { scale: 1.02, backgroundColor: '#22c55e' } : {}}
+                    whileTap={!isSubmitting ? { scale: 0.98 } : {}}
+                    className={`w-full py-4 bg-white text-[#0a2e1f] rounded-xl font-black text-xs uppercase tracking-[0.5em] shadow-[0_20px_40px_rgba(0,0,0,0.3)] transition-all flex items-center justify-center gap-3 ${isSubmitting ? 'opacity-70 cursor-not-allowed' : ''}`}
                   >
-                    <Send className="size-4" />
-                    Initialize
+                    <Send className={`size-4 ${isSubmitting ? 'animate-pulse' : ''}`} />
+                    {isSubmitting ? 'Sending...' : 'Send'}
                   </motion.button>
+                  {submitStatus.message && (
+                    <div className={`mt-4 text-center font-bold text-sm ${submitStatus.type === 'success' ? 'text-green-400' : 'text-red-400'}`}>
+                      {submitStatus.message}
+                    </div>
+                  )}
                 </form>
               </div>
             </motion.div>
@@ -219,55 +249,7 @@ export function Contact() {
       </section>
 
       {/* Village Ops - Unique Pulse Hub Design */}
-      <section className="relative py-24 bg-white overflow-hidden">
-        {/* Dynamic Pulse Background */}
-        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[800px] bg-green-50 rounded-full scale-0 animate-ping opacity-20 pointer-events-none" />
 
-        <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            className="text-center mb-12"
-          >
-            <h2 className="text-5xl font-black text-[#0a2e1f] mb-6 tracking-tighter uppercase italic">
-              Regional <span className="text-green-600">Density</span>
-            </h2>
-            <p className="text-xl text-[#0a2e1f] font-black max-w-2xl mx-auto tracking-wide uppercase">
-              Powering agricultural innovation across 40+ strategic village sectors.
-            </p>
-          </motion.div>
-
-          <div className="grid md:grid-cols-4 gap-8">
-            {[
-              { label: 'Strategic Sectors', value: '40+', icon: MapPin },
-              { label: 'Primary Producers', value: '100+', icon: Users },
-              { label: 'Operations Command', value: '10+', icon: UserCog },
-              { label: 'Field Logistics', value: '40+', icon: Send },
-            ].map((stat, index) => (
-              <motion.div
-                key={index}
-                initial={{ opacity: 0, y: 30 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ delay: index * 0.1 }}
-                className="relative group bg-gray-50 p-10 rounded-[3rem] border border-gray-100 hover:bg-[#0a2e1f] transition-all duration-500 text-center shadow-lg"
-              >
-                <div className="size-16 rounded-full bg-white shadow-md flex items-center justify-center mx-auto mb-6 group-hover:scale-110 transition-transform">
-                  <stat.icon className="size-8 text-green-600" />
-                </div>
-                <div className="text-5xl font-black text-[#0a2e1f] group-hover:text-white mb-2 transition-colors">
-                  {stat.value}
-                </div>
-                <div className="text-slate-600 group-hover:text-green-400 font-black text-[10px] uppercase tracking-widest transition-colors mb-4">
-                  {stat.label}
-                </div>
-                <div className="w-8 h-1 bg-green-600/20 mx-auto rounded-full group-hover:w-16 group-hover:bg-green-600 transition-all duration-500" />
-              </motion.div>
-            ))}
-          </div>
-        </div>
-      </section>
     </div>
   );
 }

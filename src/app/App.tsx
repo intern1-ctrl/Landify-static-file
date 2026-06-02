@@ -7,6 +7,7 @@ import { Roles } from './pages/Roles';
 import { Contact } from './pages/Contact';
 import { Terms } from './pages/Terms';
 import { Privacy } from './pages/Privacy';
+import { Blog } from './pages/Blog';
 
 import { ScrollToTop } from './components/ScrollToTop';
 
@@ -23,6 +24,7 @@ export default function App() {
           <Route path="/contact" element={<Contact />} />
           <Route path="/terms" element={<Terms />} />
           <Route path="/privacy" element={<Privacy />} />
+          <Route path="/blog" element={<Blog />} />
         </Routes>
       </Layout>
     </Router>

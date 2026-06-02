@@ -205,8 +205,8 @@ export function Privacy() {
                 </p>
                 <div className="bg-gradient-to-br from-green-50 to-gray-50 p-6 rounded-2xl border border-gray-100">
                   <ul className="space-y-2 text-gray-700">
-                    <li><strong>Email:</strong> contact@markwave.ai</li>
-                    <li><strong>Phone:</strong> +91 77027 10290</li>
+                    <li><strong>Email:</strong> contact@landify.in</li>
+                    <li><strong>Phone:</strong> +91 70758 66239</li>
                     <li><strong>Address:</strong> 206, 2nd floor, Block-A, PSR Prime Tower, Beside DLF, Gachibowli</li>
                   </ul>
                 </div>

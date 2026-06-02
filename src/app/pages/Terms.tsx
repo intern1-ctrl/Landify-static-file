@@ -185,8 +185,8 @@ export function Terms() {
               <section>
                 <h2 className="text-3xl font-bold text-gray-900 mb-4">12. Contact Information</h2>
                 <p className="text-gray-700 leading-relaxed">
-                  For questions about these Terms, please contact us at contact@markwave.ai or
-                  call +91 77027 10290.
+                  For questions about these Terms, please contact us at contact@landify.in or
+                  call +91 70758 66239.
                 </p>
               </section>
             </div>

@@ -228,24 +228,31 @@ export function Roles() {
 
           <div className="grid md:grid-cols-3 gap-12">
             {[
-              {
-                icon: Sprout,
-                title: 'Farmers',
-                items: ['Guaranteed ₹1L Income', 'Full Resource Autonomy', 'Land Ownership Security', 'Sustainable Training'],
-                color: 'green'
-              },
-              {
-                icon: Users,
-                title: 'Agents',
-                items: ['High-yield Commissions', 'Village Network Growth', 'Professional Coaching', 'Regular Income Stream'],
-                color: 'blue'
-              },
+
+
+
               {
                 icon: UserCog,
                 title: 'Officers',
                 items: ['Executive Leadership', 'Performance Bonuses', 'Regional Authority', '40+ Village Reach'],
                 color: 'purple'
               },
+
+             
+              {
+                icon: Users,
+                title: 'Agents',
+                items: ['High-yield Commissions', 'Village Network Growth', 'Professional Coaching', 'Regular Income Stream'],
+                color: 'blue'
+              },
+
+               {
+                icon: Sprout,
+                title: 'Farmers',
+                items: ['Guaranteed ₹1L Income', 'Full Resource Autonomy', 'Land Ownership Security', 'Sustainable Training'],
+                color: 'green'
+              }
+          
             ].map((benefit, index) => (
               <motion.div
                 key={index}
