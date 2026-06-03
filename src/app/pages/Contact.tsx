@@ -2,6 +2,7 @@ import { PageBanner } from '../components/PageBanner';
 import { motion } from 'motion/react';
 import { Mail, Phone, MapPin, Send, Users, UserCog } from 'lucide-react';
 import { useState } from 'react';
+import api from '../services/apiService';
 
 const IMAGES = {
   banner: 'https://images.unsplash.com/photo-1757525473930-0b82237e55ac?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxzdXN0YWluYWJsZSUyMGFncmljdWx0dXJlJTIwZ3JlZW4lMjBmYXJtaW5nfGVufDF8fHx8MTc3MDI5NzAxOHww&ixlib=rb-4.1.0&q=80&w=1080',
@@ -17,33 +18,67 @@ export function Contact() {
   });
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [submitStatus, setSubmitStatus] = useState<{ type: 'success' | 'error' | null; message: string }>({ type: null, message: '' });
+  const [errors, setErrors] = useState<{ [key: string]: string }>({});
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    setIsSubmitting(true);
+    setErrors({});
     setSubmitStatus({ type: null, message: '' });
 
-    try {
-      // Placeholder API URL - to be replaced later
-      const response = await fetch('https://api.placeholder.com/contact', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify(formData),
-      });
+    // Validate form fields
+    const newErrors: { [key: string]: string } = {};
+    if (!formData.name.trim()) {
+      newErrors.name = 'Full identity is required.';
+    } else if (formData.name.trim().length < 3) {
+      newErrors.name = 'Full identity must be at least 3 characters.';
+    }
 
-      if (response.ok || true) { // Remove '|| true' once real API is added, keeping it now so it "succeeds" during testing if the dummy fails due to CORS
-        setSubmitStatus({ type: 'success', message: 'Thank you for your interest! We will contact you soon.' });
-        setFormData({ name: '', email: '', phone: '', role: '', message: '' });
-      } else {
-        setSubmitStatus({ type: 'error', message: 'Failed to send message. Please try again later.' });
-      }
-    } catch (error) {
-      // For now, still show success for testing since there is no real API yet
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    if (!formData.email.trim()) {
+      newErrors.email = 'Digital mail is required.';
+    } else if (!emailRegex.test(formData.email.trim())) {
+      newErrors.email = 'Please enter a valid email address.';
+    }
+
+    if (!formData.phone.trim()) {
+      newErrors.phone = 'Phone number is required.';
+    } else if (!/^\d{10}$/.test(formData.phone.trim())) {
+      newErrors.phone = 'Phone number must be exactly 10 digits.';
+    }
+
+    if (!formData.role) {
+      newErrors.role = 'Please select a role.';
+    }
+
+    if (!formData.message.trim()) {
+      newErrors.message = 'Detailed inquiry is required.';
+    } else if (formData.message.trim().length < 10) {
+      newErrors.message = 'Inquiry must be at least 10 characters.';
+    }
+
+    if (Object.keys(newErrors).length > 0) {
+      setErrors(newErrors);
+      return;
+    }
+
+    setIsSubmitting(true);
+    try {
+      const payload = {
+        name: formData.name,
+        contact_number: formData.phone,
+        email: formData.email || null,
+        role: formData.role.replace('-', '_').toUpperCase(),
+        description: formData.message,
+      };
+
+      await api.post('/api/v1/enquiries/', payload);
+
       setSubmitStatus({ type: 'success', message: 'Thank you for your interest! We will contact you soon.' });
       setFormData({ name: '', email: '', phone: '', role: '', message: '' });
-      console.error('Error submitting form:', error);
+      setErrors({});
+    } catch (error: any) {
+      setSubmitStatus({ type: 'error', message: error.message || 'Failed to send message. Please try again later.' });
+      console.error('Error submitting enquiry:', error);
     } finally {
       setIsSubmitting(false);
     }
@@ -160,29 +195,39 @@ export function Contact() {
                   COntact<span className="text-amber-400">US</span>
                 </h3>
 
-                <form onSubmit={handleSubmit} className="space-y-8">
+                <form onSubmit={handleSubmit} noValidate className="space-y-8">
                   <div className="grid md:grid-cols-2 gap-8">
                     <div className="space-y-2">
                       <label className="text-amber-300 font-bold text-[10px] uppercase tracking-[0.3em]">Full Identity</label>
                       <input
                         type="text"
-                        required
                         value={formData.name}
-                        onChange={(e) => setFormData({ ...formData, name: e.target.value.replace(/[^a-zA-Z\s]/g, '') })}
-                        className="w-full bg-white/5 border-b border-white/20 px-0 py-3 text-white focus:outline-none focus:border-green-500 transition-colors font-medium text-lg placeholder:text-white/10"
+                        onChange={(e) => {
+                          setFormData({ ...formData, name: e.target.value.replace(/[^a-zA-Z\s]/g, '') });
+                          if (errors.name) setErrors(prev => ({ ...prev, name: '' }));
+                        }}
+                        className={`w-full bg-white/5 border-b px-0 py-3 text-white focus:outline-none focus:border-green-500 transition-colors font-medium text-lg placeholder:text-white/10 ${
+                          errors.name ? 'border-red-500 focus:border-red-500' : 'border-white/20'
+                        }`}
                         placeholder="ENTER NAME"
                       />
+                      {errors.name && <p className="text-red-400 text-xs font-bold tracking-wide mt-1">{errors.name}</p>}
                     </div>
                     <div className="space-y-2">
                       <label className="text-amber-300 font-bold text-[10px] uppercase tracking-[0.3em]">Digital Mail</label>
                       <input
                         type="email"
-                        required
                         value={formData.email}
-                        onChange={(e) => setFormData({ ...formData, email: e.target.value })}
-                        className="w-full bg-white/5 border-b border-white/20 px-0 py-3 text-white focus:outline-none focus:border-green-500 transition-colors font-medium text-lg placeholder:text-white/10"
+                        onChange={(e) => {
+                          setFormData({ ...formData, email: e.target.value });
+                          if (errors.email) setErrors(prev => ({ ...prev, email: '' }));
+                        }}
+                        className={`w-full bg-white/5 border-b px-0 py-3 text-white focus:outline-none focus:border-green-500 transition-colors font-medium text-lg placeholder:text-white/10 ${
+                          errors.email ? 'border-red-500 focus:border-red-500' : 'border-white/20'
+                        }`}
                         placeholder="EMAIL@DOMAIN"
                       />
+                      {errors.email && <p className="text-red-400 text-xs font-bold tracking-wide mt-1">{errors.email}</p>}
                     </div>
                   </div>
 
@@ -191,39 +236,55 @@ export function Contact() {
                       <label className="text-amber-300 font-bold text-[10px] uppercase tracking-[0.3em]">Phone Number</label>
                       <input
                         type="tel"
-                        required
                         value={formData.phone}
-                        onChange={(e) => setFormData({ ...formData, phone: e.target.value.replace(/\D/g, '') })}
-                        className="w-full bg-white/5 border-b border-white/20 px-0 py-3 text-white focus:outline-none focus:border-green-500 transition-colors font-medium text-lg placeholder:text-white/10"
+                        maxLength={10}
+                        onChange={(e) => {
+                          setFormData({ ...formData, phone: e.target.value.replace(/\D/g, '').slice(0, 10) });
+                          if (errors.phone) setErrors(prev => ({ ...prev, phone: '' }));
+                        }}
+                        className={`w-full bg-white/5 border-b px-0 py-3 text-white focus:outline-none focus:border-green-500 transition-colors font-medium text-lg placeholder:text-white/10 ${
+                          errors.phone ? 'border-red-500 focus:border-red-500' : 'border-white/20'
+                        }`}
                         placeholder="ENTER PHONE NUMBER"
                       />
+                      {errors.phone && <p className="text-red-400 text-xs font-bold tracking-wide mt-1">{errors.phone}</p>}
                     </div>
                     <div className="space-y-2">
                       <label className="text-amber-300 font-bold text-[10px] uppercase tracking-[0.3em]">Role</label>
                       <select
-                        required
                         value={formData.role}
-                        onChange={(e) => setFormData({ ...formData, role: e.target.value })}
-                        className="w-full bg-transparent border-b border-white/20 px-0 py-3 text-white focus:outline-none focus:border-green-500 transition-colors font-medium text-lg appearance-none cursor-pointer"
+                        onChange={(e) => {
+                          setFormData({ ...formData, role: e.target.value });
+                          if (errors.role) setErrors(prev => ({ ...prev, role: '' }));
+                        }}
+                        className={`w-full bg-transparent border-b px-0 py-3 text-white focus:outline-none focus:border-green-500 transition-colors font-medium text-lg appearance-none cursor-pointer ${
+                          errors.role ? 'border-red-500 focus:border-red-500' : 'border-white/20'
+                        }`}
                       >
                         <option value="" className="bg-[#0a2e1f]">SELECT ROLE</option>
                         <option value="farmer" className="bg-[#0a2e1f]">FARMER</option>
                         <option value="agent" className="bg-[#0a2e1f]">AGENT</option>
                         <option value="field-officer" className="bg-[#0a2e1f]">FIELD OFFICER</option>
                       </select>
+                      {errors.role && <p className="text-red-400 text-xs font-bold tracking-wide mt-1">{errors.role}</p>}
                     </div>
                   </div>
 
                   <div className="space-y-2">
                     <label className="text-amber-300 font-bold text-[10px] uppercase tracking-[0.3em]">Detailed Inquiry</label>
                     <textarea
-                      required
                       value={formData.message}
-                      onChange={(e) => setFormData({ ...formData, message: e.target.value })}
+                      onChange={(e) => {
+                        setFormData({ ...formData, message: e.target.value });
+                        if (errors.message) setErrors(prev => ({ ...prev, message: '' }));
+                      }}
                       rows={4}
-                      className="w-full bg-white/5 border border-white/10 rounded-xl p-4 text-white focus:outline-none focus:border-green-500 transition-colors font-medium placeholder:text-white/10 resize-none"
+                      className={`w-full bg-white/5 border rounded-xl p-4 text-white focus:outline-none focus:border-green-500 transition-colors font-medium placeholder:text-white/10 resize-none ${
+                        errors.message ? 'border-red-500 focus:border-red-500' : 'border-white/10'
+                      }`}
                       placeholder="MESSAGE CONTENT..."
                     />
+                    {errors.message && <p className="text-red-400 text-xs font-bold tracking-wide mt-1">{errors.message}</p>}
                   </div>
 
                   <motion.button

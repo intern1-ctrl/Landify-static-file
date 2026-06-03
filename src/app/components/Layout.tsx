@@ -58,7 +58,7 @@ export function Layout({ children }: { children: React.ReactNode }) {
                   to={link.path}
                   className={`relative px-4 py-2 rounded-full transition-all duration-300 flex items-center gap-2.5 font-bold text-sm group drop-shadow-sm z-10 ${isActive(link.path)
                     ? 'text-white'
-                    : `${(isScrolled || location.pathname === '/roles' || location.pathname === '/about' || location.pathname === '/process') ? 'text-slate-900 hover:text-green-800' : 'text-white hover:text-green-200'}`
+                    : `${(isScrolled || location.pathname === '/roles' || location.pathname === '/about' || location.pathname === '/process' || location.pathname === '/blog') ? 'text-slate-900 hover:text-green-800' : 'text-white hover:text-green-200'}`
                     }`}
                 >
                   {isActive(link.path) && (
@@ -71,7 +71,7 @@ export function Layout({ children }: { children: React.ReactNode }) {
                   <div className={`p-1 rounded-full transition-all duration-300 flex items-center justify-center ${
                     isActive(link.path)
                       ? 'bg-white/25 text-white'
-                      : (isScrolled || location.pathname === '/roles' || location.pathname === '/about' || location.pathname === '/process')
+                      : (isScrolled || location.pathname === '/roles' || location.pathname === '/about' || location.pathname === '/process' || location.pathname === '/blog')
                       ? 'bg-green-50 text-green-700 group-hover:bg-green-600 group-hover:text-white group-hover:rotate-6 shadow-sm'
                       : 'bg-white/15 text-white group-hover:bg-green-600 group-hover:text-white group-hover:rotate-6 shadow-sm'
                   }`}>
