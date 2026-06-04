@@ -9,9 +9,23 @@
 export const API_BASE_URL = 'https://landify-backend-stagging-services-612299373064.asia-south2.run.app';
 export const SWAGGER_DOCS_URL = `${API_BASE_URL}/docs`;
 
+// Swagger Credentials for staging/testing environment loaded dynamically from environment variables
+const SWAGGER_USERNAME = import.meta.env.VITE_SWAGGER_USERNAME || 'landify-dev';
+const SWAGGER_PASSWORD = import.meta.env.VITE_SWAGGER_PASSWORD || 'landify-dev@999';
+
+// Safe dynamic generation of Basic Auth header using btoa
+const getBasicAuthHeader = (): string => {
+  try {
+    return `Basic ${btoa(`${SWAGGER_USERNAME}:${SWAGGER_PASSWORD}`)}`;
+  } catch (error) {
+    console.error('Failed to generate Basic Auth header dynamically:', error);
+    return 'Basic bGFuZGlmeS1kZXY6bGFuZGlmeS1kZXZAOTk5'; // Fallback to landify-dev:landify-dev@999
+  }
+};
+
 // Default Headers as requested
 export const DEFAULT_HEADERS: Record<string, string> = {
-  'Authorization': 'Basic bGFuZGlmeS1kZXY6bGFuZGlmeS1kZXZAOTk5',
+  'Authorization': getBasicAuthHeader(),
   'Content-Type': 'application/json',
 };
 
