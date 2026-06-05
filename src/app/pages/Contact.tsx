@@ -20,6 +20,45 @@ export function Contact() {
   const [submitStatus, setSubmitStatus] = useState<{ type: 'success' | 'error' | null; message: string }>({ type: null, message: '' });
   const [errors, setErrors] = useState<{ [key: string]: string }>({});
 
+  const validateField = (name: string, value: string) => {
+    let errorMsg = '';
+    if (name === 'name') {
+      if (!value.trim()) {
+        errorMsg = 'Full identity is required.';
+      } else if (value.trim().length < 3) {
+        errorMsg = 'Full identity must be at least 3 characters.';
+      }
+    } else if (name === 'email') {
+      const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+      if (!value.trim()) {
+        errorMsg = 'Digital mail is required.';
+      } else if (!emailRegex.test(value.trim())) {
+        errorMsg = 'Please enter a valid email address.';
+      }
+    } else if (name === 'phone') {
+      if (!value.trim()) {
+        errorMsg = 'Phone number is required.';
+      } else if (!/^\d{10}$/.test(value.trim())) {
+        errorMsg = 'Phone number must be exactly 10 digits.';
+      }
+    } else if (name === 'role') {
+      if (!value) {
+        errorMsg = 'Please select a role.';
+      }
+    } else if (name === 'message') {
+      if (!value.trim()) {
+        errorMsg = 'Detailed inquiry is required.';
+      } else if (value.trim().length < 10) {
+        errorMsg = 'Inquiry must be at least 10 characters.';
+      }
+    }
+
+    setErrors(prev => ({
+      ...prev,
+      [name]: errorMsg
+    }));
+  };
+
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setErrors({});
@@ -206,6 +245,7 @@ export function Contact() {
                           setFormData({ ...formData, name: e.target.value.replace(/[^a-zA-Z\s]/g, '') });
                           if (errors.name) setErrors(prev => ({ ...prev, name: '' }));
                         }}
+                        onBlur={(e) => validateField('name', e.target.value)}
                         className={`w-full bg-white/5 border-b px-0 py-3 text-white focus:outline-none focus:border-green-500 transition-colors font-medium text-lg placeholder:text-white/10 ${
                           errors.name ? 'border-red-500 focus:border-red-500' : 'border-white/20'
                         }`}
@@ -222,6 +262,7 @@ export function Contact() {
                           setFormData({ ...formData, email: e.target.value });
                           if (errors.email) setErrors(prev => ({ ...prev, email: '' }));
                         }}
+                        onBlur={(e) => validateField('email', e.target.value)}
                         className={`w-full bg-white/5 border-b px-0 py-3 text-white focus:outline-none focus:border-green-500 transition-colors font-medium text-lg placeholder:text-white/10 ${
                           errors.email ? 'border-red-500 focus:border-red-500' : 'border-white/20'
                         }`}
@@ -242,6 +283,7 @@ export function Contact() {
                           setFormData({ ...formData, phone: e.target.value.replace(/\D/g, '').slice(0, 10) });
                           if (errors.phone) setErrors(prev => ({ ...prev, phone: '' }));
                         }}
+                        onBlur={(e) => validateField('phone', e.target.value)}
                         className={`w-full bg-white/5 border-b px-0 py-3 text-white focus:outline-none focus:border-green-500 transition-colors font-medium text-lg placeholder:text-white/10 ${
                           errors.phone ? 'border-red-500 focus:border-red-500' : 'border-white/20'
                         }`}
@@ -257,6 +299,7 @@ export function Contact() {
                           setFormData({ ...formData, role: e.target.value });
                           if (errors.role) setErrors(prev => ({ ...prev, role: '' }));
                         }}
+                        onBlur={(e) => validateField('role', e.target.value)}
                         className={`w-full bg-transparent border-b px-0 py-3 text-white focus:outline-none focus:border-green-500 transition-colors font-medium text-lg appearance-none cursor-pointer ${
                           errors.role ? 'border-red-500 focus:border-red-500' : 'border-white/20'
                         }`}
@@ -278,6 +321,7 @@ export function Contact() {
                         setFormData({ ...formData, message: e.target.value });
                         if (errors.message) setErrors(prev => ({ ...prev, message: '' }));
                       }}
+                      onBlur={(e) => validateField('message', e.target.value)}
                       rows={4}
                       className={`w-full bg-white/5 border rounded-xl p-4 text-white focus:outline-none focus:border-green-500 transition-colors font-medium placeholder:text-white/10 resize-none ${
                         errors.message ? 'border-red-500 focus:border-red-500' : 'border-white/10'
