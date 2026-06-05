@@ -108,6 +108,7 @@ export function Blog() {
   const [isCardPreviewOpen, setIsCardPreviewOpen] = useState(false);
   const [farmers, setFarmers] = useState<any[]>([]);
   const [searchQuery, setSearchQuery] = useState('');
+  const [showRemaining, setShowRemaining] = useState(false);
   const [activeFarmer, setActiveFarmer] = useState<any>(null);
   const [loading, setLoading] = useState<boolean>(true);
   const [error, setError] = useState<string | null>(null);
@@ -118,9 +119,9 @@ export function Blog() {
   const [slideIndex, setSlideIndex] = useState(0);
   const [visibleCount, setVisibleCount] = useState(3);
 
-  const remainingFarmers = farmers.slice(2).filter(farmer =>
-    farmer.name?.toLowerCase().includes(searchQuery.toLowerCase()) ||
-    farmer.village_name?.toLowerCase().includes(searchQuery.toLowerCase()) ||
+  const remainingFarmers = farmers.slice(2).filter(farmer => 
+    farmer.name?.toLowerCase().includes(searchQuery.toLowerCase()) || 
+    farmer.village_name?.toLowerCase().includes(searchQuery.toLowerCase()) || 
     farmer.description?.toLowerCase().includes(searchQuery.toLowerCase())
   );
 
@@ -427,7 +428,7 @@ export function Blog() {
 
                           {/* Title */}
                           <h2 className="text-3xl font-black text-[#0a2e1f] mb-4 leading-tight text-left">
-                            The Journey of Green Fodder From {farmer.name}'s Farm to Landify
+                            The Journey of Green Fodder: From {farmer.village_name || 'Siddavaram'} to Delivery
                           </h2>
 
                           {/* Description */}
@@ -501,15 +502,21 @@ export function Blog() {
               </div>
             </div>
           )}
-          {/* Control Bar: Section Title & Search Bar */}
+          {/* Control Bar: See More Button & Search Bar */}
           {farmers.slice(2).length > 0 && (
-            <div className="w-full px-4 sm:px-8 lg:px-12 max-w-7xl mx-auto my-6 flex flex-col sm:flex-row items-center justify-between gap-6 transition-all duration-300">
-              <div className="text-left w-full sm:w-auto">
-                <h3 className="text-2xl font-black text-[#0a2e1f] tracking-tight">More Farmer Stories</h3>
-                <p className="text-xs text-gray-500 font-semibold mt-1">Explore our growing community of local farmers</p>
+            <div className="w-full px-4 sm:px-8 lg:px-12 max-w-7xl mx-auto my-6 flex flex-col sm:flex-row justify-between items-center gap-6">
+              {/* Left side: See More Button */}
+              <div className="flex items-center">
+                <button
+                  onClick={() => setShowRemaining(prev => !prev)}
+                  className="inline-flex items-center gap-2.5 bg-[#0a2e1f] hover:bg-green-700 text-white px-8 py-3.5 rounded-full font-black text-xs uppercase tracking-widest transition-all duration-300 shadow-md hover:scale-105 cursor-pointer"
+                >
+                  <span>{showRemaining ? 'See Less' : 'See More Stories'}</span>
+                  <ArrowRight className={`size-4 text-green-300 transition-transform duration-300 ${showRemaining ? '-rotate-90' : 'rotate-90'}`} />
+                </button>
               </div>
 
-              {/* Search Bar */}
+              {/* Right side: Search Bar */}
               <div className="relative w-full sm:w-80">
                 <span className="absolute inset-y-0 left-0 pl-4 flex items-center pointer-events-none">
                   <Search className="size-5 text-gray-400" />
@@ -517,7 +524,12 @@ export function Blog() {
                 <input
                   type="text"
                   value={searchQuery}
-                  onChange={(e) => setSearchQuery(e.target.value)}
+                  onChange={(e) => {
+                    setSearchQuery(e.target.value);
+                    if (e.target.value !== '') {
+                      setShowRemaining(true);
+                    }
+                  }}
                   placeholder="Search farmer stories..."
                   className="w-full bg-white text-gray-800 placeholder-gray-400 pl-11 pr-10 py-3 rounded-full border border-gray-200 focus:outline-none focus:ring-2 focus:ring-green-500 focus:border-transparent shadow-sm text-sm font-semibold transition-all duration-300"
                 />
@@ -533,8 +545,8 @@ export function Blog() {
             </div>
           )}
 
-          {/* Remaining Small Cards Horizontal Auto Slider */}
-          {remainingFarmers.length > 0 && (
+          {/* Remaining Small Cards Horizontal Auto Slider (Conditional) */}
+          {(showRemaining || searchQuery !== '') && remainingFarmers.length > 0 && (
             <div className="w-full px-12 relative mt-4">
               <div className="max-w-7xl mx-auto overflow-hidden py-4">
                 <div
@@ -597,8 +609,9 @@ export function Blog() {
                       <button
                         key={idx}
                         onClick={() => setSlideIndex(idx)}
-                        className={`h-2.5 rounded-full transition-all duration-300 cursor-pointer ${slideIndex === idx ? 'bg-green-600 w-8' : 'bg-gray-300 w-2.5 hover:bg-gray-400'
-                          }`}
+                        className={`h-2.5 rounded-full transition-all duration-300 cursor-pointer ${
+                          slideIndex === idx ? 'bg-green-600 w-8' : 'bg-gray-300 w-2.5 hover:bg-gray-400'
+                        }`}
                         aria-label={`Go to slide ${idx + 1}`}
                       />
                     ))}
@@ -638,7 +651,7 @@ export function Blog() {
           )}
 
           {/* No results message */}
-          {searchQuery !== '' && remainingFarmers.length === 0 && (
+          {(showRemaining || searchQuery !== '') && remainingFarmers.length === 0 && (
             <div className="w-full text-center py-16 text-green-800 font-bold text-lg max-w-lg mx-auto bg-white rounded-3xl shadow-md border border-green-100 my-4">
               No matching farmer stories found for "{searchQuery}".
             </div>
@@ -812,8 +825,8 @@ export function Blog() {
                       key={idx}
                       onClick={() => setSelectedCycleIndex(idx)}
                       className={`px-6 py-2.5 rounded-full font-bold text-xs uppercase tracking-widest transition-all duration-300 shadow-sm cursor-pointer ${selectedCycleIndex === idx
-                        ? 'bg-[#0a2e1f] text-white shadow-md scale-105'
-                        : 'bg-gray-50 text-gray-600 hover:bg-gray-100 border border-gray-200'
+                          ? 'bg-[#0a2e1f] text-white shadow-md scale-105'
+                          : 'bg-gray-50 text-gray-600 hover:bg-gray-100 border border-gray-200'
                         }`}
                     >
                       Cycle {idx + 1}
@@ -832,12 +845,12 @@ export function Blog() {
                   return (
                     <div
                       key={index}
-                      className="relative grid grid-cols-1 md:grid-cols-[minmax(0,1fr)_48px_minmax(0,1fr)] items-center gap-8 md:gap-0 w-full"
+                      className="relative grid grid-cols-1 md:grid-cols-[1fr_auto_1fr] items-center gap-8 md:gap-0 w-full"
                     >
                       {/* Left Side */}
                       <div className={`flex flex-col justify-center w-full ${isEven
-                        ? 'order-2 md:order-1 md:pr-16 flex items-center md:items-end justify-center'
-                        : 'order-1 md:order-1 md:pr-16 text-center md:text-right'
+                          ? 'order-2 md:order-1 md:pr-16 flex items-center md:items-end justify-center'
+                          : 'order-1 md:order-1 md:pr-16 text-center md:text-right'
                         }`}>
                         {isEven ? (
                           <div className="w-full max-w-[400px]">
@@ -849,20 +862,20 @@ export function Blog() {
                           </div>
                         ) : (
                           <div className="flex flex-col md:items-end w-full">
-                            <span className="text-[10px] font-bold text-gray-400 uppercase tracking-widest block mb-1">
+                            <span className="text-xs font-bold text-gray-400 uppercase tracking-widest block mb-2">
                               {item.step}
                             </span>
-                            <h4 className="text-lg md:text-xl font-serif font-bold text-[#0a2e1f] mb-2 leading-tight">
+                            <h4 className="text-2xl md:text-3xl font-serif font-black text-[#0a2e1f] mb-3 leading-tight">
                               {item.title}
                             </h4>
-                            <div className="flex items-center gap-2 bg-green-50/80 border border-green-100 rounded-full px-3 py-1 text-green-700 text-[10px] font-bold mb-2 shadow-sm w-fit md:ml-auto">
-                              <Calendar className="size-3 text-green-600" />
+                            <div className="flex items-center gap-2 bg-green-50/80 border border-green-100 rounded-full px-3 py-1 text-green-700 text-xs font-bold mb-3 shadow-sm w-fit md:ml-auto">
+                              <Calendar className="size-3.5 text-green-600" />
                               <span>{item.date}</span>
                               <span className="text-green-300">|</span>
-                              <Clock className="size-3 text-green-600" />
+                              <Clock className="size-3.5 text-green-600" />
                               <span>{item.time}</span>
                             </div>
-                            <p className="text-gray-600 text-xs md:text-sm leading-relaxed font-medium max-w-xl md:ml-auto">
+                            <p className="text-gray-600 text-sm md:text-base leading-relaxed font-semibold max-w-xl md:ml-auto">
                               {item.text}
                             </p>
                           </div>
@@ -878,25 +891,25 @@ export function Blog() {
 
                       {/* Right Side */}
                       <div className={`flex flex-col justify-center w-full ${isEven
-                        ? 'order-1 md:order-3 md:pl-16 text-center md:text-left'
-                        : 'order-2 md:order-3 md:pl-16 flex items-center md:items-start justify-center'
+                          ? 'order-1 md:order-3 md:pl-16 text-center md:text-left'
+                          : 'order-2 md:order-3 md:pl-16 flex items-center md:items-start justify-center'
                         }`}>
                         {isEven ? (
                           <div className="flex flex-col md:items-start w-full">
-                            <span className="text-[10px] font-bold text-gray-400 uppercase tracking-widest block mb-1">
+                            <span className="text-xs font-bold text-gray-400 uppercase tracking-widest block mb-2">
                               {item.step}
                             </span>
-                            <h4 className="text-lg md:text-xl font-serif font-bold text-[#0a2e1f] mb-2 leading-tight">
+                            <h4 className="text-2xl md:text-3xl font-serif font-black text-[#0a2e1f] mb-3 leading-tight">
                               {item.title}
                             </h4>
-                            <div className="flex items-center gap-2 bg-green-50/80 border border-green-100 rounded-full px-3 py-1 text-green-700 text-[10px] font-bold mb-2 shadow-sm w-fit md:mr-auto">
-                              <Calendar className="size-3 text-green-600" />
+                            <div className="flex items-center gap-2 bg-green-50/80 border border-green-100 rounded-full px-3 py-1 text-green-700 text-xs font-bold mb-3 shadow-sm w-fit md:mr-auto">
+                              <Calendar className="size-3.5 text-green-600" />
                               <span>{item.date}</span>
                               <span className="text-green-300">|</span>
-                              <Clock className="size-3 text-green-600" />
+                              <Clock className="size-3.5 text-green-600" />
                               <span>{item.time}</span>
                             </div>
-                            <p className="text-gray-600 text-xs md:text-sm leading-relaxed font-medium max-w-xl md:mr-auto">
+                            <p className="text-gray-600 text-sm md:text-base leading-relaxed font-semibold max-w-xl md:mr-auto">
                               {item.text}
                             </p>
                           </div>
