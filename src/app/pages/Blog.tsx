@@ -108,7 +108,6 @@ export function Blog() {
   const [isCardPreviewOpen, setIsCardPreviewOpen] = useState(false);
   const [farmers, setFarmers] = useState<any[]>([]);
   const [searchQuery, setSearchQuery] = useState('');
-  const [showRemaining, setShowRemaining] = useState(false);
   const [activeFarmer, setActiveFarmer] = useState<any>(null);
   const [loading, setLoading] = useState<boolean>(true);
   const [error, setError] = useState<string | null>(null);
@@ -379,6 +378,31 @@ export function Blog() {
         </div>
       ) : (
         <section className="py-16 w-full flex flex-col gap-16">
+          {/* Top Right Search Bar */}
+          {farmers.length > 0 && (
+            <div className="w-full px-4 sm:px-8 lg:px-12 flex justify-end -mb-4">
+              <div className="relative w-full sm:w-80">
+                <span className="absolute inset-y-0 left-0 pl-4 flex items-center pointer-events-none">
+                  <Search className="size-5 text-gray-400" />
+                </span>
+                <input
+                  type="text"
+                  value={searchQuery}
+                  onChange={(e) => setSearchQuery(e.target.value)}
+                  placeholder="Search farmer stories..."
+                  className="w-full bg-white text-gray-800 placeholder-gray-400 pl-11 pr-10 py-3 rounded-full border border-gray-200 focus:outline-none focus:ring-2 focus:ring-green-500 focus:border-transparent shadow-sm text-sm font-semibold transition-all duration-300"
+                />
+                {searchQuery && (
+                  <button
+                    onClick={() => setSearchQuery('')}
+                    className="absolute inset-y-0 right-0 pr-4 flex items-center text-gray-400 hover:text-gray-600 transition-colors"
+                  >
+                    <X className="size-4" />
+                  </button>
+                )}
+              </div>
+            </div>
+          )}
           {/* First 2 Full Width Cards */}
           {farmers.slice(0, 2).length > 0 && (
             <div className="w-full px-4 sm:px-8 lg:px-12">
@@ -428,7 +452,7 @@ export function Blog() {
 
                           {/* Title */}
                           <h2 className="text-3xl font-black text-[#0a2e1f] mb-4 leading-tight text-left">
-                            The Journey of Green Fodder: From {farmer.village_name || 'Siddavaram'} to Delivery
+                            The Journey of Green Fodder From {farmer.name} Farm Land  to Landify
                           </h2>
 
                           {/* Description */}
@@ -502,51 +526,9 @@ export function Blog() {
               </div>
             </div>
           )}
-          {/* Control Bar: See More Button & Search Bar */}
-          {farmers.slice(2).length > 0 && (
-            <div className="w-full px-4 sm:px-8 lg:px-12 max-w-7xl mx-auto my-6 flex flex-col sm:flex-row justify-between items-center gap-6">
-              {/* Left side: See More Button */}
-              <div className="flex items-center">
-                <button
-                  onClick={() => setShowRemaining(prev => !prev)}
-                  className="inline-flex items-center gap-2.5 bg-[#0a2e1f] hover:bg-green-700 text-white px-8 py-3.5 rounded-full font-black text-xs uppercase tracking-widest transition-all duration-300 shadow-md hover:scale-105 cursor-pointer"
-                >
-                  <span>{showRemaining ? 'See Less' : 'See More Stories'}</span>
-                  <ArrowRight className={`size-4 text-green-300 transition-transform duration-300 ${showRemaining ? '-rotate-90' : 'rotate-90'}`} />
-                </button>
-              </div>
 
-              {/* Right side: Search Bar */}
-              <div className="relative w-full sm:w-80">
-                <span className="absolute inset-y-0 left-0 pl-4 flex items-center pointer-events-none">
-                  <Search className="size-5 text-gray-400" />
-                </span>
-                <input
-                  type="text"
-                  value={searchQuery}
-                  onChange={(e) => {
-                    setSearchQuery(e.target.value);
-                    if (e.target.value !== '') {
-                      setShowRemaining(true);
-                    }
-                  }}
-                  placeholder="Search farmer stories..."
-                  className="w-full bg-white text-gray-800 placeholder-gray-400 pl-11 pr-10 py-3 rounded-full border border-gray-200 focus:outline-none focus:ring-2 focus:ring-green-500 focus:border-transparent shadow-sm text-sm font-semibold transition-all duration-300"
-                />
-                {searchQuery && (
-                  <button
-                    onClick={() => setSearchQuery('')}
-                    className="absolute inset-y-0 right-0 pr-4 flex items-center text-gray-400 hover:text-gray-600 transition-colors"
-                  >
-                    <X className="size-4" />
-                  </button>
-                )}
-              </div>
-            </div>
-          )}
-
-          {/* Remaining Small Cards Horizontal Auto Slider (Conditional) */}
-          {(showRemaining || searchQuery !== '') && remainingFarmers.length > 0 && (
+          {/* Remaining Small Cards Horizontal Auto Slider */}
+          {remainingFarmers.length > 0 && (
             <div className="w-full px-12 relative mt-4">
               <div className="max-w-7xl mx-auto overflow-hidden py-4">
                 <div
@@ -651,7 +633,7 @@ export function Blog() {
           )}
 
           {/* No results message */}
-          {(showRemaining || searchQuery !== '') && remainingFarmers.length === 0 && (
+          {searchQuery !== '' && remainingFarmers.length === 0 && (
             <div className="w-full text-center py-16 text-green-800 font-bold text-lg max-w-lg mx-auto bg-white rounded-3xl shadow-md border border-green-100 my-4">
               No matching farmer stories found for "{searchQuery}".
             </div>
@@ -725,15 +707,15 @@ export function Blog() {
                     </h2>
 
                     {(() => {
-                      const descParagraphs = (activeFarmer.description || 'No description available.')
+                      const descParagraphs: string[] = String(activeFarmer?.description || 'No description available.')
                         .split('\n')
-                        .map(p => p.trim())
+                        .map((p: string) => p.trim())
                         .filter(Boolean);
 
                       return (
                         <>
                           <div className="flex flex-col gap-3 mb-6">
-                            {descParagraphs.map((p, idx) => (
+                            {descParagraphs.map((p: string, idx: number) => (
                               <p key={idx} className="text-gray-600 text-sm leading-relaxed font-medium">
                                 {p}
                               </p>
