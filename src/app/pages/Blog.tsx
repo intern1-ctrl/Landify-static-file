@@ -510,7 +510,7 @@ export function Blog() {
 
                           {/* Title */}
                           <h2 className="text-3xl font-black text-[#0a2e1f] mb-4 leading-tight text-left">
-                            The Journey of Green Fodder From {farmer.name === 'BOBBY' || farmer.name === 'Sudha Rani' ? `${farmer.name}'s Farm` : `${farmer.name} Farm Land`} to Landify
+                            The Journey of Green Fodder From {farmer.name === 'Sudha Rani' ? `${farmer.name}'s Farm Land` : `${farmer.name} Farm Land`} to Landify
                           </h2>
 
                           {/* Description */}
