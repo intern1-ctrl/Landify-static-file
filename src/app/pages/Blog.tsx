@@ -8,7 +8,11 @@ const STATIC_BOBBY_FARMER = {
   name: 'Sudha Rani',
   village_name: 'NERANIKI',
   profile_image: farmProfImg,
-  description: `మా భూమిలో పచ్చి గడ్డి (Green Fodder) పండించడానికి Landify కంపెనీతో కలిసి పని చేస్తుంది. మొదట కంపెనీ రైతులతో ఒప్పందం (Contract) చేసుకుని, భూమిలో పచ్చి గడ్డి పంట వేయడానికి సహాయం చేస్తుంది. ఎకరానికి అవసరమైన మొక్కలు (Saplings) కంపెనీ ఇస్తుంది. ఒక ఎకరానికి సుమారు **10,000 మొక్కలు** ఇస్తారు. అలాగే తక్కువ ధరలో ఎరువులు కూడా అందిస్తారు, అందువల్ల రైతుకు ఖర్చు కొంత తగ్గుతుంది. రైతు తన భూమిలో నీరు పెట్టి, పంటను జాగ్రత్తగా చూసుకుంటూ పచ్చి గడ్డి పెంచుతాడు. ఈ సమయంలో కూడా కంపెనీ అవసరమైన సహాయం చేస్తుంది. పచ్చి గడ్డి పూర్తిగా సిద్ధమైన తర్వాత, కోత పని (Harvesting) కూడా Landify కంపెనీనే చూసుకుంటుంది. కూలీల కోసం లేదా యంత్రాల కోసం రైతు వెతకాల్సిన అవసరం లేదు. కోత పూర్తయ్యాక, ఎంత టన్నుల పచ్చి గడ్డి వచ్చింది అనేదాని ఆధారంగా కంపెనీ రైతుకు డబ్బులు చెల్లిస్తుంది. ఇలా రైతు తన భూమిలో పచ్చి గడ్డి పండించి ఆదాయం పొందుతాడు, అలాగే Landify కంపెనీ కూడా రైతుకు పూర్తి సహాయం చేస్తుంది.`,
+  description: `మా భూమిలో పచ్చి గడ్డి పండించడానికి మేము Landify కంపెనీతో కలిసి పని చేస్తున్నాం. కంపెనీ ముందుగా రైతులతో ఒప్పందం చేసుకుని, పచ్చి గడ్డి పంట వేయడానికి సహాయం చేస్తుంది. ఒక ఎకరానికి అవసరమైన సుమారు 10,000 మొక్కలు కంపెనీ ఇస్తుంది. అలాగే తక్కువ ధరలో ఎరువులు కూడా అందిస్తుంది, అందువల్ల రైతు ఖర్చు కొంత తగ్గుతుంది.
+
+రైతు తన భూమిలో నీరు పెట్టి, పంటను జాగ్రత్తగా చూసుకుంటూ పచ్చి గడ్డి పెంచుతాడు. ఈ సమయంలో కూడా కంపెనీ అవసరమైన సహాయం చేస్తుంది. పచ్చి గడ్డి పూర్తిగా సిద్ధమైన తర్వాత కోత పని కూడా కంపెనీయే చూసుకుంటుంది, కాబట్టి రైతు కూలీల కోసం లేదా యంత్రాల కోసం వెతకాల్సిన అవసరం ఉండదు.
+
+కోత పూర్తయ్యాక ఎంత టన్నుల పచ్చి గడ్డి వచ్చిందో దాని ఆధారంగా కంపెనీ రైతుకు డబ్బులు చెల్లిస్తుంది. ఇలా రైతు తన భూమిలో పచ్చి గడ్డి పండించి మంచి ఆదాయం పొందుతాడు, కంపెనీ కూడా పూర్తి సహాయం చేస్తుంది`,
   land_images: ['/1 .png', '/2 .png', '/3 .png', '/4 .png', '/5 .png', '/6 .png', '/7 .png', '/8 .png', '/9 .png'],
   crop_cycles: [
     {
@@ -337,7 +341,7 @@ export function Blog() {
           title: 'Sapling Support',
           image: farmer.land_images?.[0] || '/1 .png',
           icon: Sprout,
-          text: `My name is ${farmerName}, and I am a farmer from ${farmer.village_name || 'Neraniki'}. This year, I gave my land to the Landify company on a contract for green grass cultivation. The company supported us by giving saplings based on land size. They provided 10,000 saplings for cultivation. This made our work easier because we did not need to search for saplings outside.`,
+          text: `నా పేరు ${farmerName}, నేను ${farmer.village_name} గ్రామానికి చెందిన రైతును. మా భూమిలో పచ్చి గడ్డి పండించడానికి మేము Landify కంపెనీతో కలిసి పని చేస్తున్నాం. కంపెనీ ముందుగా రైతులతో ఒప్పందం చేసుకుని, పచ్చి గడ్డి పంట వేయడానికి సహాయం చేస్తుంది. ఒక ఎకరానికి అవసరమైన సుమారు 10,000 మొక్కలు కంపెనీ ఇస్తుంది.`,
           date: 'March 15, 2026',
           time: '12:48 PM'
         },
@@ -346,7 +350,7 @@ export function Blog() {
           title: 'Fertilizer Support',
           image: farmer.land_images?.[1] || '/2 .png',
           icon: Tag,
-          text: `One good thing about working with Landify company is they provide fertilizers at a low price. This helped me reduce my cultivation expenses significantly and ensured healthy growth for the grass.`,
+          text: `అలాగే తక్కువ ధరలో ఎరువులు కూడా అందిస్తుంది, అందువల్ల రైతు ఖర్చు కొంత తగ్గుతుంది.`,
           date: 'March 30, 2026',
           time: '10:30 AM'
         },
@@ -355,7 +359,7 @@ export function Blog() {
           title: 'Cultivation Experience',
           image: farmer.land_images?.[2] || '/3 .png',
           icon: Droplet,
-          text: `After planting the saplings, we regularly watered and maintained the land carefully. Green grass cultivation needs proper care, and we worked every day in the field to grow healthy grass. Seeing the land slowly turn green gave us happiness and confidence that our hard work would bring good results after harvesting.`,
+          text: `రైతు తన భూమిలో నీరు పెట్టి, పంటను జాగ్రత్తగా చూసుకుంటూ పచ్చి గడ్డి పెంచుతాడు. ఈ సమయంలో కూడా కంపెనీ అవసరమైన సహాయం చేస్తుంది.`,
           date: 'April 30, 2026',
           time: '08:00 AM'
         },
@@ -364,7 +368,7 @@ export function Blog() {
           title: 'Harvesting by Landify Company',
           image: harvestImg,
           icon: Scissors,
-          text: `When the crop became ready, the Landify company itself came and harvested the cultivated land. This helped us a lot because we did not have to struggle to find workers or machines for harvesting. The company managed the harvesting process smoothly, and it reduced our burden as farmers.`,
+          text: `పచ్చి గడ్డి పూర్తిగా సిద్ధమైన తర్వాత కోత పని కూడా కంపెనీయే చూసుకుంటుంది, కాబట్టి రైతు కూలీల కోసం లేదా యంత్రాల కోసం వెతకాల్సిన అవసరం ఉండదు.`,
           date: 'May 29, 2026',
           time: '12:23 PM'
         },
@@ -373,7 +377,7 @@ export function Blog() {
           title: 'Payment Received',
           image: farmer.land_images?.[4] || '/5 .png',
           icon: IndianRupee,
-          text: `After completing the harvest, the company calculated the total tonnage and processed my payment directly. I received a fair price and a steady income for my green fodder crop, which helps support my family's needs.`,
+          text: `కోత పూర్తయ్యాక ఎంత టన్నుల పచ్చి గడ్డి వచ్చిందో దాని ఆధారంగా కంపెనీ రైతుకు డబ్బులు చెల్లిస్తుంది. ఇలా రైతు తన భూమిలో పచ్చి గడ్డి పండించి మంచి ఆదాయం పొందుతాడు, కంపెనీ కూడా పూర్తి సహాయం చేస్తుంది.`,
           date: 'June 05, 2026',
           time: '04:15 PM'
         },
