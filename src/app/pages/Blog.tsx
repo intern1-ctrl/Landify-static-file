@@ -2,12 +2,52 @@ import { useEffect, useState } from 'react';
 import { motion, AnimatePresence } from 'motion/react';
 import { Calendar, Clock, ArrowRight, Leaf, Sprout, ChevronLeft, ChevronRight, MapPin, User, X, Tag, Droplet, Scissors, IndianRupee, CheckCircle, PackageCheck, Tractor, BadgeCheck, ShieldCheck, ClipboardCheck, Search } from 'lucide-react';
 import api from '../services/apiService';
+import farmProfImg from '../../assets/farm_prof.jpeg';
+
+const STATIC_BOBBY_FARMER = {
+  name: 'Sudha Rani',
+  village_name: 'NERANIKI',
+  profile_image: farmProfImg,
+  description: `మా భూమిలో పచ్చి గడ్డి (Green Fodder) పండించడానికి Landify కంపెనీతో కలిసి పని చేస్తుంది. మొదట కంపెనీ రైతులతో ఒప్పందం (Contract) చేసుకుని, భూమిలో పచ్చి గడ్డి పంట వేయడానికి సహాయం చేస్తుంది. ఎకరానికి అవసరమైన మొక్కలు (Saplings) కంపెనీ ఇస్తుంది. ఒక ఎకరానికి సుమారు **10,000 మొక్కలు** ఇస్తారు. అలాగే తక్కువ ధరలో ఎరువులు కూడా అందిస్తారు, అందువల్ల రైతుకు ఖర్చు కొంత తగ్గుతుంది. రైతు తన భూమిలో నీరు పెట్టి, పంటను జాగ్రత్తగా చూసుకుంటూ పచ్చి గడ్డి పెంచుతాడు. ఈ సమయంలో కూడా కంపెనీ అవసరమైన సహాయం చేస్తుంది. పచ్చి గడ్డి పూర్తిగా సిద్ధమైన తర్వాత, కోత పని (Harvesting) కూడా Landify కంపెనీనే చూసుకుంటుంది. కూలీల కోసం లేదా యంత్రాల కోసం రైతు వెతకాల్సిన అవసరం లేదు. కోత పూర్తయ్యాక, ఎంత టన్నుల పచ్చి గడ్డి వచ్చింది అనేదాని ఆధారంగా కంపెనీ రైతుకు డబ్బులు చెల్లిస్తుంది. ఇలా రైతు తన భూమిలో పచ్చి గడ్డి పండించి ఆదాయం పొందుతాడు, అలాగే Landify కంపెనీ కూడా రైతుకు పూర్తి సహాయం చేస్తుంది.`,
+  land_images: ['/1 .png', '/2 .png', '/3 .png', '/4 .png', '/5 .png', '/6 .png', '/7 .png', '/8 .png', '/9 .png'],
+  crop_cycles: [
+    {
+      started_at: '2026-03-22T00:00:00.000Z',
+      crop_started_date: '2026-03-22T00:00:00.000Z',
+      landId: 'L-BOBBY-01',
+      agent_name: 'Landify Agent',
+      no_tones: 12.5,
+      amount: 45000,
+      stems_cost: 10000,
+      agent_commission: 2250,
+      net_farmer_amount: 32750,
+      stems_count: 10000,
+      fertilizer_cost: 1500,
+      days_to_harvest: 75,
+      is_active: true,
+      harvest_status: 'COMPLETED',
+      farmer_payment_received: true,
+      createdAt: '2026-03-22T00:00:00.000Z',
+      updatedAt: '2026-06-05T00:00:00.000Z',
+      harvested_date: '2026-06-05T00:00:00.000Z',
+      admin_approved_at: '2026-06-08T00:00:00.000Z',
+    }
+  ],
+  cycle_history: {
+    cycles: [
+      {
+        events: []
+      }
+    ]
+  }
+};
+
 
 interface ImageCarouselProps {
   images?: string[];
 }
 
-const ImageCarousel = ({ images = ['/1 .png', '/2 .png', '/3 .png', '/4 .png', '/5 .png'] }: ImageCarouselProps) => {
+const ImageCarousel = ({ images = ['/1 .png', '/2 .png', '/3 .png', '/4 .png', '/5 .png', '/6 .png', '/7 .png', '/8 .png', '/9 .png'] }: ImageCarouselProps) => {
   const [currentIndex, setCurrentIndex] = useState(0);
 
   useEffect(() => {
@@ -160,35 +200,9 @@ export function Blog() {
   }, [activeFarmer]);
 
   useEffect(() => {
-    const fetchFarmers = async () => {
-      try {
-        setLoading(true);
-        setError(null);
-        const data = await api.get('/api/v1/farmers/');
-        if (data && data.farmers && data.farmers.length > 0) {
-          // Normalize description encoding issues if any exist
-          const sanitizedFarmers = data.farmers.map((f: any) => ({
-            ...f,
-            village_name: f.village_name ? f.village_name.split(' - ')[0] : 'N/A'
-          }));
-          setFarmers(sanitizedFarmers);
-          setActiveFarmer(sanitizedFarmers[0]);
-        } else {
-          setFarmers([]);
-          setActiveFarmer(null);
-          setError("No active farmer stories were found in the staging database.");
-        }
-      } catch (err: any) {
-        console.error('Error fetching farmers from backend:', err);
-        setFarmers([]);
-        setActiveFarmer(null);
-        setError(err.message || 'Failed to communicate with staging backend. Please verify your connection.');
-      } finally {
-        setLoading(false);
-      }
-    };
-
-    fetchFarmers();
+    setFarmers([STATIC_BOBBY_FARMER]);
+    setActiveFarmer(STATIC_BOBBY_FARMER);
+    setLoading(false);
   }, []);
 
   useEffect(() => {
@@ -318,11 +332,51 @@ export function Blog() {
     // If no events at all, fall back to 5 generic stages from crop_cycles data
     if (events.length === 0) {
       return [
-        { step: 'CYCLE STARTED', title: 'Crop Cycle Initiated', image: farmer.land_images?.[0] || '/1 .png', icon: Sprout, text: `${farmerName} partnered with Landify and started cultivation on land ${landId} with ${stemsCount.toLocaleString()} saplings.`, date: formatTs(activeCycle.crop_started_date || activeCycle.started_at).date, time: formatTs(activeCycle.crop_started_date || activeCycle.started_at).time },
-        { step: 'FERTILIZER', title: 'Fertilizer & Nutrition', image: farmer.land_images?.[1] || '/2 .png', icon: Tag, text: `Subsidized organic fertilizers were provided. Total cost: ₹${fertCost.toLocaleString()}.`, date: formatTs(activeCycle.createdAt).date, time: formatTs(activeCycle.createdAt).time },
-        { step: 'CULTIVATION', title: 'Active Field Growth', image: farmer.land_images?.[2] || '/3 .png', icon: Droplet, text: `Crop is ${activeCycle.is_active ? 'ACTIVE' : 'INACTIVE'} and monitored by ${agentName} for ${durationDays} days.`, date: formatTs(activeCycle.updatedAt).date, time: formatTs(activeCycle.updatedAt).time },
-        { step: 'HARVESTING', title: 'Harvest & Yield', image: harvestImg, icon: Scissors, text: `Landify completed harvesting. Yield: ${yieldTons} tons. Status: ${activeCycle.harvest_status || 'N/A'}.`, date: formatTs(activeCycle.harvested_date).date, time: formatTs(activeCycle.harvested_date).time },
-        { step: 'PAYMENT', title: 'Farmer Income Disbursed', image: farmer.land_images?.[4] || '/5 .png', icon: IndianRupee, text: `Net payout to farmer: ₹${netFarmer.toLocaleString()} after deductions. Payment: ${activeCycle.farmer_payment_received ? 'COMPLETED' : 'PENDING'}.`, date: formatTs(activeCycle.admin_approved_at).date, time: formatTs(activeCycle.admin_approved_at).time },
+        {
+          step: 'SAPLING SUPPORT',
+          title: 'Sapling Support',
+          image: farmer.land_images?.[0] || '/1 .png',
+          icon: Sprout,
+          text: `My name is ${farmerName}, and I am a farmer from ${farmer.village_name || 'Neraniki'}. This year, I gave my land to the Landify company on a contract for green grass cultivation. The company supported us by giving saplings based on land size. They provided 10,000 saplings for cultivation. This made our work easier because we did not need to search for saplings outside.`,
+          date: 'March 15, 2026',
+          time: '12:48 PM'
+        },
+        {
+          step: 'FERTILIZER SUPPORT',
+          title: 'Fertilizer Support',
+          image: farmer.land_images?.[1] || '/2 .png',
+          icon: Tag,
+          text: `One good thing about working with Landify company is they provide fertilizers at a low price. This helped me reduce my cultivation expenses significantly and ensured healthy growth for the grass.`,
+          date: 'March 30, 2026',
+          time: '10:30 AM'
+        },
+        {
+          step: 'CULTIVATION EXPERIENCE',
+          title: 'Cultivation Experience',
+          image: farmer.land_images?.[2] || '/3 .png',
+          icon: Droplet,
+          text: `After planting the saplings, we regularly watered and maintained the land carefully. Green grass cultivation needs proper care, and we worked every day in the field to grow healthy grass. Seeing the land slowly turn green gave us happiness and confidence that our hard work would bring good results after harvesting.`,
+          date: 'April 30, 2026',
+          time: '08:00 AM'
+        },
+        {
+          step: 'HARVESTING SUPPORT',
+          title: 'Harvesting by Landify Company',
+          image: harvestImg,
+          icon: Scissors,
+          text: `When the crop became ready, the Landify company itself came and harvested the cultivated land. This helped us a lot because we did not have to struggle to find workers or machines for harvesting. The company managed the harvesting process smoothly, and it reduced our burden as farmers.`,
+          date: 'May 29, 2026',
+          time: '12:23 PM'
+        },
+        {
+          step: 'PAYMENT RECEIVED',
+          title: 'Payment Received',
+          image: farmer.land_images?.[4] || '/5 .png',
+          icon: IndianRupee,
+          text: `After completing the harvest, the company calculated the total tonnage and processed my payment directly. I received a fair price and a steady income for my green fodder crop, which helps support my family's needs.`,
+          date: 'June 05, 2026',
+          time: '04:15 PM'
+        },
       ];
     }
 
@@ -452,7 +506,7 @@ export function Blog() {
 
                           {/* Title */}
                           <h2 className="text-3xl font-black text-[#0a2e1f] mb-4 leading-tight text-left">
-                            The Journey of Green Fodder From {farmer.name} Farm Land  to Landify
+                            The Journey of Green Fodder From {farmer.name === 'BOBBY' || farmer.name === 'Sudha Rani' ? `${farmer.name}'s Farm` : `${farmer.name} Farm Land`} to Landify
                           </h2>
 
                           {/* Description */}
@@ -481,7 +535,7 @@ export function Blog() {
                                   className="inline-flex items-center gap-2 bg-green-600 hover:bg-[#0a2e1f] text-white px-6 py-3 rounded-full font-black text-xs uppercase tracking-widest hover:scale-105 transition-all duration-300 shadow-md group"
                                 >
                                   <Tractor className="size-4 text-white flex-shrink-0 group-hover:rotate-12 transition-transform" />
-                                  <span>Harvest Details</span>
+                                  <span className="uppercase">Harvest Details</span>
                                   <ArrowRight className="size-4 text-green-200 group-hover:translate-x-1 transition-transform" />
                                 </button>
                               </>
@@ -703,7 +757,7 @@ export function Blog() {
                     </div>
 
                     <h2 className="text-2xl font-black text-[#0a2e1f] mb-3 leading-tight">
-                      {`Green Fodder From ${activeFarmer.name}'s Farm Land to Landify`}
+                      {activeFarmer.name === 'BOBBY' || activeFarmer.name === 'Sudha Rani' ? `The Journey of Green Fodder From ${activeFarmer.name}'s Farm to Landify` : `Green Fodder From ${activeFarmer.name}'s Farm Land to Landify`}
                     </h2>
 
                     {(() => {
@@ -727,7 +781,7 @@ export function Blog() {
                             className="inline-flex items-center gap-2 bg-green-600 hover:bg-[#0a2e1f] text-white px-6 py-3 rounded-full font-black text-sm uppercase tracking-widest hover:scale-105 transition-all duration-300 shadow-md group"
                           >
                             <Tractor className="size-4 text-white flex-shrink-0 group-hover:rotate-12 transition-transform" />
-                            <span>Harvest Details</span>
+                            <span className="uppercase">Harvest Details</span>
                             <ArrowRight className="size-4 text-green-200 group-hover:translate-x-1 transition-transform" />
                           </button>
                         </>
